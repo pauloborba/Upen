@@ -133,21 +133,39 @@ routes.delete('/funcionarios/:id', (req: Request, res: Response) => {
 // ROTAS VEICULO ELEMENTO
 
 routes.get('/veiculo', (req: Request, res: Response) => {
-    var placa: string = String(req.query.placa);
-  
-    var veiculo: Veiculo = cdVeiculo.retornarVeiculo(placa);
-    if(!veiculo)  res.status(404).send({"erro": "Veiculo nao cadastrado!"});
-  
-    res.send({ veiculo });
-  });
+  var placa: string = String(req.query.placa);
 
-  routes.put('/veiculo', (req: Request, res: Response) => {
-    var veiculo: Veiculo = <Veiculo> req.body;
+  var veiculo: Veiculo = cdVeiculo.retornarVeiculo(placa);
+  if(!veiculo)  res.status(404).send({"erro": "Veiculo nao cadastrado!"});
 
-    veiculo = cdVeiculo.atualizarveiculo(veiculo);
-    if(!veiculo) res.status(404).send({"erro": "Veiculo nao cadastrado!"});
+  res.send({ veiculo });
+});
 
-    res.send({ veiculo });
+routes.put('/veiculo', (req: Request, res: Response) => {
+  var veiculo: Veiculo = <Veiculo> req.body;
+
+  veiculo = cdVeiculo.atualizarVeiculo(veiculo);
+  if(!veiculo) res.status(404).send({"erro": "Veiculo nao cadastrado!"});
+
+  res.send({ veiculo });
+});
+
+routes.delete('/veiculo', (req: Request, res: Response) => {
+  var placa: string = String(req.query.placa);
+
+  var veiculo: Veiculo = cdVeiculo.removerVeiculo(placa);
+  if(!veiculo) res.status(400).json({"erro": "Veiculo nao cadastrado!"});
+
+  res.send(veiculo);
+});
+
+routes.post('/veiculo', (req: Request, res: Response) => {
+   var veiculocadastro: Veiculo = <Veiculo> req.body;
+
+   var veiculo: Veiculo = cdVeiculo.cadastrarVeiculo(veiculocadastro);
+   if(!veiculo) res.status(400).send({"erro": "Veiculo ja cadastrado!"});
+
+   res.send({"alert": "Veiculo cadastrado com sucesso"});
 });
 
 export { routes };

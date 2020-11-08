@@ -4,8 +4,14 @@ export class CadastroVeiculo {
     
     veiculos: Veiculo[] = [];
    
-    cadastrarVeiculo(veiculo: Veiculo): any {
-         throw 'not implemented yet';
+    cadastrarVeiculo(veiculoCadastro: Veiculo): any {
+          let veiculo: Veiculo = this.veiculos.find(veil => veil.placa == veiculoCadastro.placa);
+          if(!veiculo) {
+               this.veiculos.push(veiculoCadastro);
+               return "Veiculo cadastrado";
+          }
+
+          return null;
     }
 
     veiculoNaoCadastrado(placa: string): boolean {
@@ -20,15 +26,21 @@ export class CadastroVeiculo {
          throw 'not implemented yet'
     }
 
-    removerVeiculo(placa: string): number{
-         throw 'not implemented yet';
+    removerVeiculo(placa: string): any{
+          let veiculo: Veiculo = this.veiculos.find(vel => vel.placa = placa);
+          let index: number = this.veiculos.findIndex(vel => vel.placa = placa);
+          if(!veiculo) 
+               return null;
+
+          this.veiculos.splice(index, 1);
+          return veiculo;
     }
 
     retornarVeiculo(placa: string): any {
         throw 'not implemented yet'
     }
 
-    atualizarveiculo(veiculo: Veiculo): Veiculo {
+    atualizarVeiculo(veiculo: Veiculo): Veiculo {
         throw 'not implemented yet'
     }
 
