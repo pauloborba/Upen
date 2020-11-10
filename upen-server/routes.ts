@@ -151,6 +151,16 @@ routes.put('/veiculo', (req: Request, res: Response) => {
   res.send({ veiculo });
 });
 
+routes.put('/veiculo/pneu', (req: Request, res: Response) => {
+  var placa: string = String(req.query.placa);
+  var id: string = String(req.query.id);
+
+  var veiculo: Veiculo = cdVeiculo.desatribuirPneu(placa, id);
+  if(!veiculo) res.status(404).send({"erro": "Nao foi possivel desatribuir o pneu!"});
+
+  res.send({ veiculo });
+});
+
 routes.delete('/veiculo', (req: Request, res: Response) => {
   var placa: string = String(req.query.placa);
 

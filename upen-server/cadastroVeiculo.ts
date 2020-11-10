@@ -52,17 +52,32 @@ export class CadastroVeiculo {
     }
 
     atribuirPneu(placa: string, pneu_id: string): Veiculo {
-          var result: Veiculo = this.veiculos.find(veil => veil.placa == placa);     
+          var veiculo: Veiculo = this.veiculos.find(veil => veil.placa == placa);     
           var pneu: PneuMock = this.cdPneuMock.retornarPneu(pneu_id);  
           
-          if(result && pneu){
-               if(result.pneus.length < 4) 
-                    result.pneus.push(pneu);               
+          if(veiculo && pneu){
+               if(veiculo.pneus.length < 4) 
+               veiculo.pneus.push(pneu);               
           
-               return result;
+               return veiculo;
           }
 
           return null;
+    }
+
+    desatribuirPneu(placa: string, pneu_id: string): Veiculo {
+         var veiculo: Veiculo = this.veiculos.find(veil => veil.placa == placa);
+         var pneu: PneuMock = this.cdPneuMock.retornarPneu(pneu_id);
+
+         if(veiculo && pneu){
+               let index = veiculo.pneus.findIndex(i => i.id == pneu.id);
+               if(index != -1)
+                    veiculo.pneus.splice(index, 1);
+               
+               return veiculo;
+         }
+
+         return null;
     }
 
 }
