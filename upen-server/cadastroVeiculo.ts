@@ -1,8 +1,11 @@
+import { PneuMock } from '../common/pneuMock';
 import { Veiculo } from '../common/veiculo';
+import { CadastroDePneuMock } from './cadastroPneuMock';
 
 export class CadastroVeiculo {
     
     veiculos: Veiculo[] = [];
+    cdPneuMock: CadastroDePneuMock = new CadastroDePneuMock();
    
     cadastrarVeiculo(veiculoCadastro: Veiculo): any {
           let veiculo: Veiculo = this.veiculos.find(veil => veil.placa == veiculoCadastro.placa);
@@ -10,12 +13,8 @@ export class CadastroVeiculo {
                this.veiculos.push(veiculoCadastro);
                return "Veiculo cadastrado";
           }
-
+     
           return null;
-    }
-
-    veiculoNaoCadastrado(placa: string): boolean {
-         throw 'not implemented yet';
     }
 
     listarVeiculos(): Veiculo[] {
@@ -34,14 +33,36 @@ export class CadastroVeiculo {
 
     retornarVeiculo(placa: string): any {
           let veiculo: Veiculo = this.veiculos.find(veil => veil.placa == placa);
-          if(!veiculo)
-               return null;
-
           return veiculo;
     }
 
     atualizarVeiculo(veiculo: Veiculo): Veiculo {
-        throw 'not implemented yet'
+          var result: Veiculo = this.veiculos.find(veil => veil.placa == veiculo.placa);
+          var auxresult = new Veiculo();
+
+          if(result){
+               auxresult.clone(veiculo);    
+               this.removerVeiculo(result.placa);
+               this.cadastrarVeiculo(auxresult);
+
+               return auxresult;
+          }
+        
+        return null;
+    }
+
+    atribuirPneu(placa: string, pneu_id: string): Veiculo {
+          var result: Veiculo = this.veiculos.find(veil => veil.placa == placa);     
+          var pneu: PneuMock = this.cdPneuMock.retornarPneu(pneu_id);  
+          
+          if(result && pneu){
+               if(result.pneus.length < 4) 
+                    result.pneus.push(pneu);               
+          
+               return result;
+          }
+
+          return null;
     }
 
 }

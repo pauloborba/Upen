@@ -136,16 +136,17 @@ routes.get('/veiculo', (req: Request, res: Response) => {
   var placa: string = String(req.query.placa);
 
   var veiculo: Veiculo = cdVeiculo.retornarVeiculo(placa);
-  if(!veiculo)  res.status(404).send({"erro": "Veiculo nao cadastrado!"});
+  if(!veiculo)  res.status(404).send({"erro": "Veiculo nao cadastrado! - caiu no get"});
 
   res.send({ veiculo });
 });
 
 routes.put('/veiculo', (req: Request, res: Response) => {
-  var veiculo: Veiculo = <Veiculo> req.body;
+  var placa: string = String(req.query.placa);
+  var pneu_id: string = String(req.query.pneu_id);
 
-  veiculo = cdVeiculo.atualizarVeiculo(veiculo);
-  if(!veiculo) res.status(404).send({"erro": "Veiculo nao cadastrado!"});
+  var veiculo: Veiculo = cdVeiculo.atribuirPneu(placa, pneu_id);
+  if(!veiculo) res.status(404).send({"erro": "Nao foi possivel atribuir o pneu!"});
 
   res.send({ veiculo });
 });
@@ -154,7 +155,7 @@ routes.delete('/veiculo', (req: Request, res: Response) => {
   var placa: string = String(req.query.placa);
 
   var veiculo: Veiculo = cdVeiculo.removerVeiculo(placa);
-  if(!veiculo) res.status(400).json({"erro": "Veiculo nao cadastrado!"});
+  if(!veiculo) res.status(400).json({"erro": "Veiculo nao cadastrado! - caiu no delete"});
 
   res.send(veiculo);
 });

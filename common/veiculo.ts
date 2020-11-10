@@ -1,4 +1,4 @@
-import { Pneu } from './pneu';
+import { PneuMock } from './pneuMock';
 
 export class Veiculo {
     marca: string;
@@ -6,7 +6,7 @@ export class Veiculo {
     placa: string;
     modelo: string;
     funcao: string;
-    pneus: Pneu[];
+    pneus: PneuMock[];
     eventos: [string, string, number][]; //[data, mensagem, preço]
 
     constructor(){
