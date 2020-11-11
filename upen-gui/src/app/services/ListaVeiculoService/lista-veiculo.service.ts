@@ -16,4 +16,31 @@ export class ListaVeiculoService {
 
     constructor(private http: HttpClient) {}
 
+  getVeiculos(): Observable<Veiculo[]> {
+    return this.http.get<Veiculo[]>(this.servURL + "/veiculos")
+              .pipe(
+                retry(2)
+            );
+  }
+
+  criarVeiculo(veiculo: Veiculo): Observable<Historico[]> {
+    return this.http.get<Historico[]>(this.servURL + "/historicos")
+                .pipe(
+                  retry(2)
+                );
+  }
+
+  deletarVeiculo(placa: string): Observable<number>{
+    return this.http.delete<any>(this.servURL + "/veiculos/"+ placa).pipe(
+        map( res => {if(res.success) {return res.index} else return -1})
+    );
+  }
+
+  cadastrarVeiculo(veiculo: Veiculo): Observable<Veiculo>{
+    return this.http.post<any>(this.servURL + "/veiculos", veiculo, {headers: this.headers}).pipe(
+      retry(2),
+      map( res => {if (res.success) {return veiculo;} else {return null;}} )
+    );
+  }
+
 }

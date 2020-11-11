@@ -77,11 +77,11 @@ routes.post('/veiculos', (req: Request, res: Response) => {
     var veiculo = cdVeiculo.cadastrarVeiculo(vel);
     if(veiculo) {
         var historico = cdHistorico.cadastrar(vel.placa,"Cadastrou","Veiculo"); 
-        if (historico) {res.send({ veiculo });}
-        else { res.status(404).send({"falha": "Cadastro de veiculo falhou"});}
+        if (historico) {res.send({"success": "Veiculo cadastrado com sucesso"});}
+        else { res.send({"falha": "Cadastro de veiculo falhou"});}
     }
     else 
-        res.status(404).send({"falha": "Cadastro de veiculo falhou"});
+        res.send({"falha": "Cadastro de veiculo falhou"});
 })
 
 routes.delete('/veiculos/:id', function(req: Request, res: Response){

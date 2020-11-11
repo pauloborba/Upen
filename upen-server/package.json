@@ -4,12 +4,15 @@
   "description": "A backend to main aplication",
   "main": "upen-server.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc",
+    "start": "npm run tsc && node compiledCode/upen-server/upen-server.js"
   },
   "author": "Upen Team",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.15.4"
+    "express": "^4.15.4",
+    "body-parser": "^1.19.0"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.0",
