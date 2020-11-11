@@ -1,4 +1,4 @@
-import { PneuMock } from './pneuMock';
+import { Pneu } from './pneu';
 
 export class Veiculo {
     marca: string;
@@ -6,8 +6,8 @@ export class Veiculo {
     placa: string;
     modelo: string;
     funcao: string;
-    pneus: PneuMock[];
-    eventos: [string, string, number][]; //[data, mensagem, preço]
+    pneus: Pneu[];
+    eventos: string; //[data, mensagem, preço]
 
     constructor(){
         this.clean();
@@ -19,7 +19,7 @@ export class Veiculo {
         this.placa = "";
         this.modelo = "";
         this.funcao = "";
-        this.eventos = [];
+        this.eventos = "";
         this.pneus = [];
     }
 
