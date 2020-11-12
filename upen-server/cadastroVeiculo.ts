@@ -2,7 +2,7 @@ import { Veiculo } from '../common/veiculo';
 
 export class CadastroVeiculo {
     
-    veiculos: Veiculo[] = [];
+     veiculos: Veiculo[] = [];
 
      cadastrarVeiculo(veiculo: Veiculo): any {
           if(this.veiculoNaoCadastrado(veiculo.placa)){
@@ -16,24 +16,27 @@ export class CadastroVeiculo {
           return !this.veiculos.find(elem => elem.placa == placa);
      }
 
-    listarVeiculos(): Veiculo[] {
+     listarVeiculos(): Veiculo[] {
           return this.veiculos;
-    }
+     }
 
-    empty(): boolean{
-         throw 'not implemented yet'
-    }
+     empty(): boolean{
+          return this.veiculos.length > 0;
+     }
 
-    removerVeiculo(placa: string): number{
-         throw 'not implemented yet';
-    }
+     removerVeiculo(placa: string): number{
+          let index = this.veiculos.findIndex( v => v.placa == placa);
+          if(index != -1)
+               this.veiculos.splice(index, 1);
+          return index;
+     }
 
-    retornarVeiculo(placa: string): any {
-        throw 'not implemented yet'
-    }
+     retornarVeiculo(placa: string): any {
+          throw 'not implemented yet'
+     }
 
-    atualizarveiculo(veiculo: Veiculo): Veiculo {
-        throw 'not implemented yet'
-    }
+     atualizarveiculo(veiculo: Veiculo): Veiculo {
+          throw 'not implemented yet'
+     }
 
 }

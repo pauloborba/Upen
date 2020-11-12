@@ -9,8 +9,7 @@ import { ListaVeiculoService } from '../../services/ListaVeiculoService/lista-ve
 })
 export class ListaVeiculoComponent implements OnInit {
 
-  //veiculos: Veiculo[];
-  veiculos;
+  veiculos: Veiculo[];
   veiculo: Veiculo = new Veiculo();
   anoAuxiliar: string  =''; 
   popupCadastro: boolean;
@@ -23,14 +22,17 @@ export class ListaVeiculoComponent implements OnInit {
 
   ngOnInit(): void {
     this.popupCadastro = false;
-    //this.botaoCadastrarPressionado = false;
     this.resetBotaoCadastrar();
     this.anoAuxiliar = "";
-    this.listaVeiculoService.getVeiculos().subscribe(
-      as => {this.veiculos = as;},
-      msg => {alert(msg.message);}
-    );
+    this.listarVeiculos();
     console.log(this.veiculos.length)
+  }
+
+  listarVeiculos(): void{
+      this.listaVeiculoService.getVeiculos().subscribe(
+        as => {this.veiculos = as;},
+        msg => {alert(msg.message);}
+      );
   }
 
   resetBotaoCadastrar(): void{
@@ -42,7 +44,6 @@ export class ListaVeiculoComponent implements OnInit {
   }
 
   criar():void{
-    //this.botaoCadastrarPressionado = true;
 
     this.setBotaoCadastrar()
 
@@ -63,7 +64,6 @@ export class ListaVeiculoComponent implements OnInit {
           this.veiculos.push(v);
           this.anoAuxiliar = "";
           this.veiculo = new Veiculo();
-          //this.botaoCadastrarPressionado = false;
           this.resetBotaoCadastrar();
           this.placaDuplicada = false;
         }else{
@@ -95,6 +95,33 @@ export class ListaVeiculoComponent implements OnInit {
     return (aux.length == 0);
   }
 
+  removerVeiculo(placa: string): void{
+    this.listaVeiculoService.deletarVeiculo(placa).subscribe(
+      ar => {
+        if(ar != -1){ // retornado o index do veiculo a ser removido
+          console.log(this.veiculos.length);
+          console.log(ar);
+          if(ar >= this.veiculos.length){
+            this.removerPorPlaca(placa);
+          }else if(this.veiculos[ar].placa == placa){
+            this.veiculos.splice(ar,1);
+          }else{ 
+            this.removerPorPlaca(placa);
+          }
+        }
+      },
+      msg => {
+        alert("Não foi possível remover o veículo")
+        this.refresh();
+      }
+    )
+  }
+
+  removerPorPlaca(placa: string): void{ // forma menos eficiente, entretanto assegura corretude
+    let index = this.veiculos.findIndex( v =>  v.placa == placa);
+    if(index != -1) this.veiculos.splice(index, 1);
+  }
+
   abrirPopup(): void{
     this.popupCadastro = true;
   }
@@ -117,6 +144,15 @@ export class ListaVeiculoComponent implements OnInit {
       data += "...";
     }
     return data;
+  }
+
+  checkFirst(i: number): boolean{
+    console.log(i);
+    return (i == 0);
+  }
+
+  refresh(): void{
+    this.listarVeiculos();
   }
 
 }

@@ -1,6 +1,7 @@
 <html >
     <head>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
     </head>
     <body>
         <div class="pageName">
@@ -21,21 +22,23 @@
             </table>
         </div>
         <div class="listaVeiculos">
-            <table *ngFor="let a of veiculos" >
+            <table *ngFor="let a of veiculos, let i = index" >
                     <div class="blocoPosition">
                         <tr name="vehiclelist">
                             <a href="https://www.youtube.com/watch?v=kfSQkZuIx84">
                                 <div class="bloco">
-                                    <!--<tr class="veiculo">-->
                                         <div class="divVeiculoInfo"><td class="veiculoInfo" name="placalist">{{displayData(a.placa)}}</td></div>
                                         <div class="divVeiculoInfo"><td class="veiculoInfo" name="modelolist">{{displayData(a.modelo)}}</td></div>
                                         <div class="divVeiculoInfo"><td class="veiculoInfo" name="marcalist">{{displayData(a.marca)}}</td></div>
                                         <div class="divVeiculoInfo"><td class="veiculoInfo" name="anolist">{{a.ano}}</td></div>
                                         <div class="divVeiculoInfo"><td class="veiculoInfo" name="funcaolist">{{displayData(a.funcao)}}</td></div>
-                                    <!--</tr>-->
                                 </div> 
                             </a>
-                            <!-- <td class="botaotd"><button class="btn" (click)="removerVeiculo(a.placa)" >  <i class="fa fa-trash"></i></button></td> -->
+                            <td class="botaotd"><button class="btn" (click)="removerVeiculo(a.placa)" >  <span class="fa fa-trash"></span></button></td>
+                            
+                            <td *ngIf = "checkFirst(i)"  class="botaoTdRefresh" (click)="refresh()"><button class="btn-refresh"><i class="fas fa-redo-alt"></i></button></td>
+
+                            <!-- <td class="botaotd"><button class="btn" (click)="removerVeiculo(a.placa)" >  <i class="fa fa-refresh"></i></button></td> -->
                         </tr>
                     </div>
             </table>
@@ -49,7 +52,6 @@
                     <!-- Modal Header -->
                     <div class="modal-header">
                         <div class="modal-title" ><h4 class="titlePopUp">Cadastre um Veículo</h4></div>
-                        <!--<button type="button" class="close" (click)="fecharPopup()" data-dismiss="modal">&times;</button>-->
                         <div class="closeDiv"><button type="button" class="botaoClose" (click)="fecharPopup()" >x</button></div>
                     </div>
             

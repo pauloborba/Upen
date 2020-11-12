@@ -1,6 +1,5 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
-
 body {
     background: rgba(0, 0, 0, 0.72);
 }
@@ -173,6 +172,35 @@ body {
 .btn:hover{
     color: blueviolet;
     color: #4d4d4d;
+}
+
+
+.btn-refresh {
+    border: solid;
+    color: black;
+    /*color:blueviolet;*/
+    padding: 12px 16px;
+    border: black;
+    cursor: pointer;
+    padding: 0px;
+
+    background: transparent;
+
+    color: #4d4d4d;
+
+    font-size: 20px;
+
+    margin-bottom: 0px;
+    margin-left: 80px;;
+}
+.btn-refresh:hover{
+
+    /*background: blue;*/
+
+    color: blueviolet;
+    /*color: lightblue;*/
+    font-size: 22.8px;
+    /*color: #4d4d4d;*/
 }
 
 
@@ -351,4 +379,3 @@ input[type=number] {
     font-size: 12px;
     padding-left: 4px; 
 }
-
