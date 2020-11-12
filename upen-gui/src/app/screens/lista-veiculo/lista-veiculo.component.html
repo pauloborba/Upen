@@ -34,7 +34,7 @@
                                         <div class="divVeiculoInfo"><td class="veiculoInfo" name="funcaolist">{{displayData(a.funcao)}}</td></div>
                                 </div> 
                             </a>
-                            <td class="botaotd"><button class="btn" (click)="removerVeiculo(a.placa)" >  <span class="fa fa-trash"></span></button></td>
+                            <td class="botaotd"><button class="btn" name="removerButton" (click)="removerVeiculo(a.placa)" >  <span class="fa fa-trash"></span></button></td>
                             
                             <td *ngIf = "checkFirst(i)"  class="botaoTdRefresh" (click)="refresh()"><button class="btn-refresh"><i class="fas fa-redo-alt"></i></button></td>
 
@@ -52,7 +52,7 @@
                     <!-- Modal Header -->
                     <div class="modal-header">
                         <div class="modal-title" ><h4 class="titlePopUp">Cadastre um Veículo</h4></div>
-                        <div class="closeDiv"><button type="button" class="botaoClose" (click)="fecharPopup()" >x</button></div>
+                        <div class="closeDiv"><button type="button" name="botaoFecharPopUp" class="botaoClose" (click)="fecharPopup()" >x</button></div>
                     </div>
             
                     <!-- Modal body -->

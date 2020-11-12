@@ -3,7 +3,13 @@ Feature: As a user of the system
          So that I can manage their informations
 
 Scenario: Registering vehicles with non registered plate
-Given I am at the vehiclesList page
+Given I am at the "Vehicles List" page
 Given I cannot see a vehicle with registration plate "RJR1162" in the vehicles list
 When I try to register vehicle "Corcel" with year "1973", brand "Ford", function "Revisão" and plate "RJR1162"
 Then I can see vehicle "Corcel" with year "1973", brand "Ford", function "Revisão" and plate "RJR1162" in the vehicles list
+
+Scenario: Deleting vehicles with registered plate
+Given I am at the "Vehicles List" page
+Given I can see a vehicle with registration plate "RJR1652" in the vehicles list
+When I try to delete vehicle with plate "RJR1652"
+Then I can no longer see vehicle with plate "RJR1652" in the vehicles list
