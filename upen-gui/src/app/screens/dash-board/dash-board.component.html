@@ -1,1 +1,47 @@
-<p>dash-board works!</p>
+<div class= "dashboard-container">
+  <div class = "button-container">
+   <button mat-button class = "button" >
+     <mat-icon>cloud_download</mat-icon>
+     Planilha
+   </button>
+  </div>
+   <div class = "cards-container">
+   <div class = "histRegister">
+     <canvas id="registerChart"></canvas>
+   </div>
+   <div class = "porcent">
+     <div class = "graphPorcent">
+       <canvas id="porcentPneuChart"></canvas>
+       <div class = "graph-more">
+         <button mat-icon-button (click)="btnClick('pneu')">
+           <mat-icon color = "accent">east</mat-icon>
+         </button>
+       </div>
+     </div>
+     <div class = "graphPorcent">
+       <canvas id="porcentVeiChart"></canvas>
+       <div class = "graph-more">
+        <button mat-icon-button (click)="btnClick('Veiculo')">
+           <mat-icon color = "accent">east</mat-icon>
+         </button>
+       </div>
+     </div>
+   </div>
+   <div class = "porcent">
+     <div class = "problems-container">
+       <div class = "problems">
+         <h3 style="display: block;text-align: center;">Problemas Pneu</h3>
+         <h1 style="text-align: center;">{{problemaPneu}}</h1>
+         <p style="text-align: center;">Total {{listPneu.length}} cadastrados</p>
+       </div>
+     </div>
+     <div class = "problems-container">
+       <div class = "problems">
+         <h3 style="display: block;text-align: center;">Problemas Veiculo</h3>
+         <h1 style="text-align: center;">{{problemaVeic}}</h1>
+         <p style="text-align: center;">Total {{listVeiculo.length}} cadastrados</p>
+       </div>
+     </div>
+   </div>
+  </div>
+ </div>

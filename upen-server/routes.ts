@@ -10,11 +10,15 @@ import { CadastroVeiculo } from './cadastroVeiculo';
 import { CadastroHistorico} from './cadastroHistorico'
 import { CadastroDePneu } from './cadastroPneu';
 import { CadastroFuncionario } from './cadastroFuncionario';
+import { CadastroDePneuMock } from "./cadastroPneuMock";
+import { CadastroVeiculoMock } from "./cadastroVeiculoMock";
 
 const cdHistorico: CadastroHistorico = new CadastroHistorico()
 const cdFuncionario: CadastroFuncionario = new CadastroFuncionario();
 const cdPneu: CadastroDePneu = new CadastroDePneu();
 const cdVeiculo: CadastroVeiculo = new CadastroVeiculo(); 
+const cdPneuMock: CadastroDePneuMock = new CadastroDePneuMock();
+const cdVeiculoMock: CadastroVeiculoMock = new CadastroVeiculoMock();
 
 // ROTAS DE LISTA PNEU / PNEU ELEMENTO
 
@@ -149,5 +153,14 @@ routes.get('/veiculo', (req: Request, res: Response) => {
 
     res.send({ veiculo });
 });
+
+  // rotas mock
+  routes.get('/pneusMock', (req: Request, res: Response) => {
+    res.send(JSON.stringify(cdPneuMock.getPneus()))
+  })
+
+  routes.get('/veiculosMock', (req: Request, res: Response) => {
+    res.send(JSON.stringify(cdVeiculoMock.listarVeiculos()))
+  })
 
 export { routes };
