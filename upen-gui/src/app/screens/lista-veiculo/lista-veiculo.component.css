@@ -4,6 +4,7 @@ body {
     background: rgba(0, 0, 0, 0.72);
 }
 
+
 .pageName{
     color: white;
     display: flex;
@@ -51,13 +52,14 @@ body {
 .blocoPosition{
     margin-left: 140px;
 
-    /*background: blue;*/
+    /*background: blue;
     /*width: 820px;*/
     width: 880px; /* review here */
 
     margin-bottom: 6px;
     
 }
+
 .campos{
     width: 780px;
     margin-left: 140px;
@@ -147,6 +149,8 @@ body {
     border-color: #4d4d4d;
 
     cursor: pointer;
+
+    color: #4d4d4d;
 
     font-size: 25px;
 }
@@ -378,4 +382,37 @@ input[type=number] {
 .campoNaoPreenchido{
     font-size: 12px;
     padding-left: 4px; 
+}
+
+.btnLixeira{
+    width: 44px;
+    height: 44px;
+    position: fixed;
+    bottom: 6%;
+    border-radius: 50%;
+    right: 4%;
+    right: 92.4%;
+    background: white;     
+
+    border-style: solid;
+    border-width: 4px;
+    border-color: black;
+
+    border-color: #8B5095;
+    border-color: #4d4d4d;
+
+    color: #4d4d4d;;
+
+
+    cursor: pointer;
+
+    font-size: 25px;
+}
+
+.btnLixeira:hover{
+    background-color:  #8B5095;
+    background: #4d4d4d;
+    color:white;
+    /*width: 44px;
+    height: 44px;*/
 }

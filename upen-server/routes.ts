@@ -96,6 +96,36 @@ routes.delete('/veiculos/:id', function(req: Request, res: Response){
     }
   })
 
+  routes.get('/lixeiraveiculos', (req: Request, res: Response) => { 
+    res.send(JSON.stringify(cdVeiculo.listarLixeira()));
+});
+
+
+routes.delete('/lixeiraveiculos/:id', function(req: Request, res: Response){
+    var id = req.params.id;
+    var index = cdVeiculo.removerPermanente(id);
+    if(index != -1){
+        //res.send({"success": "o veículo foi removido permanentemente com sucesso", "index": index});
+        var historico = cdHistorico.cadastrar(id,"Removeu Permanentemente","Veiculo"); 
+        if (historico) {res.send({"success": "o veículo foi removido com sucesso", "index": index})}
+        else { res.status(404).send({"falha": "Remoção de veiculo falhou"});}
+    }else{
+        res.status(404).send({"falha": "Remoção permanente de veiculo falhou"});
+    }
+  })
+
+  routes.post('/lixeiraveiculos', (req: Request, res: Response) => {
+    var vel: Veiculo = <Veiculo> req.body;
+    var index = cdVeiculo.restaurarVeiculo(vel);
+    if(index != -1) {
+        var historico = cdHistorico.cadastrar(vel.placa,"Cadastrou","Veiculo"); 
+        if (historico) {res.send({"success": "Veiculo cadastrado com sucesso", "index": index});}
+        else { res.send({"falha": "Cadastro de veiculo falhou"});}
+    }
+    else 
+        res.send({"falha": "Cadastro de veiculo falhou"});
+})
+
 // ROTAS HISTORICO
 
 routes.get('/historicos', (req: Request, res: Response) => { 

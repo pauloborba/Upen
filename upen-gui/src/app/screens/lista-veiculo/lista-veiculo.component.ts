@@ -25,7 +25,6 @@ export class ListaVeiculoComponent implements OnInit {
     this.resetBotaoCadastrar();
     this.anoAuxiliar = "";
     this.listarVeiculos();
-    console.log(this.veiculos.length)
   }
 
   listarVeiculos(): void{
@@ -99,8 +98,6 @@ export class ListaVeiculoComponent implements OnInit {
     this.listaVeiculoService.deletarVeiculo(placa).subscribe(
       ar => {
         if(ar != -1){ // retornado o index do veiculo a ser removido
-          console.log(this.veiculos.length);
-          console.log(ar);
           if(ar >= this.veiculos.length){
             this.removerPorPlaca(placa);
           }else if(this.veiculos[ar].placa == placa){
@@ -147,12 +144,15 @@ export class ListaVeiculoComponent implements OnInit {
   }
 
   checkFirst(i: number): boolean{
-    console.log(i);
     return (i == 0);
   }
 
   refresh(): void{
     this.listarVeiculos();
+  }
+
+  empty(): boolean{
+    return (this.veiculos.length == 0)
   }
 
 }

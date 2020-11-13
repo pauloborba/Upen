@@ -43,4 +43,30 @@ export class ListaVeiculoService {
     );
   }
 
+  getLixeira(): Observable<Veiculo[]> {
+    return this.http.get<Veiculo[]>(this.servURL + "/lixeiraveiculos")
+              .pipe(
+                retry(2)
+            );
+  }
+
+  deletarVeiculoPermanentemente(placa: string): Observable<number>{
+    
+    return this.http.delete<any>(this.servURL + "/lixeiraveiculos/"+ placa).pipe(
+        map( res => {if(res.success) {return res.index} else return -1})
+    );
+  }
+
+  restaurarVeiculo(veiculo: Veiculo): Observable<number>{
+
+    console.log(veiculo.placa);
+
+
+    return this.http.post<any>(this.servURL + "/lixeiraveiculos", veiculo, {headers: this.headers}).pipe(
+      retry(2),
+      map( res => {if (res.success) {return res.index;} else {return -1;}} )
+    );
+  }
+  
+
 }
