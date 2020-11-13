@@ -1,5 +1,5 @@
-import { Pneu } from '../common/pneu'
-import { CadastroDePneu } from './cadastroPneu';
+import { Pneu } from '../../common/pneu'
+import { CadastroDePneu } from '../cadastroPneu';
 
 export class CadastroDePneuMock extends CadastroDePneu {
     pneus : Pneu[] = [];
