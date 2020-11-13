@@ -3,9 +3,10 @@ import { NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MaterialModule } from './material.module';
 import { RouterModule }   from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 // componentes
 import { AppComponent } from './app.component';
@@ -16,6 +17,7 @@ import { FuncionarioComponent } from './screens/funcionario/funcionario.componen
 import { ListaVeiculoComponent } from './screens/lista-veiculo/lista-veiculo.component';
 import { PneuElementoComponent } from './screens/pneu-elemento/pneu-elemento.component';
 import { VeiculoElementoComponent } from './screens/veiculo-elemento/veiculo-elemento.component';
+import { CadastroForm } from './screens/veiculo-elemento/components/cadastro-form/cadastro-form.component';
 
 // servicos
 import { HistoricoService } from './services/HistoricoService/historico.service';
@@ -39,21 +41,22 @@ import { VeiculoElementoService } from './services/VeiculoElementoService/veicul
     DashBoardComponent,
     DashBoardDetailComponent,
     ListaPneusComponent,
+    CadastroForm
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    FormsModule,
-    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule, 
     MaterialModule,
     HttpClientModule,
     RouterModule.forRoot([{path: 'dashboard', component: DashBoardComponent},
-    {path: 'dashboard/:tipo', component: DashBoardDetailComponent},
-    {path: 'funcionarios', component: FuncionarioComponent},
+    { path: 'dashboard/:tipo', component: DashBoardDetailComponent },
+    { path: 'funcionarios', component: FuncionarioComponent },
     { path: 'pneus', component: ListaPneusComponent },
     { path: 'pneus/:id', component:PneuElementoComponent},
     { path: 'veiculos', component: ListaVeiculoComponent },
-    { path: 'veiculos/:placa', component: VeiculoElementoComponent },])
+    { path: 'veiculos/teste', component: VeiculoElementoComponent },])
   ],
   providers: [
     HistoricoService, FuncionarioService,

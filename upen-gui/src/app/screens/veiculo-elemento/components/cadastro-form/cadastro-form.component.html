@@ -1,0 +1,33 @@
+<form [formGroup]="form" (ngSubmit)="submit(form)">
+  <h1>Cadastrar Veículo</h1>
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Marca</mat-label>
+      <input id="marca" matInput formControlName="marca" placeholder="Marca" />
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-label>Ano</mat-label>
+      <input id="ano" matInput formControlName="ano" placeholder="Ano" />
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-label>Placa</mat-label>
+      <input id="placa" matInput formControlName="placa" placeholder="Placa" />
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-label>Modelo</mat-label>
+      <input id="modelo" matInput formControlName="modelo" placeholder="Modelo" />
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-label>Função</mat-label>
+      <input id="funcao" matInput formControlName="funcao" placeholder="Funcao" />
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button type="submit">Cadastrar</button>
+    <button mat-button type="button" mat-dialog-close>Cancelar</button>
+  </mat-dialog-actions> 
+</form>
