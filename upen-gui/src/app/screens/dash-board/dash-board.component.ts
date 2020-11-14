@@ -1,6 +1,7 @@
 // biblioteca importada
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
+import { saveAs } from 'file-saver';
 import * as Chart from 'chart.js';
 
 // arquivos util
@@ -9,7 +10,7 @@ import { Historico } from '../../../../../common/historico'
 import { Pneu } from '../../../../../common/pneu'
 import { Veiculo } from '../../../../../common/veiculo'
 import { dataRegister, dataPorcentPneu, dataPorcentVeiculo } from '../../util/funcoes/dashboard-chart';
-import { getBrand, getTimeEvents, getTimesHistorico } from '../../util/funcoes/listFunction'
+import { createDataCsv, getBrand, getTimeEvents, getTimesHistorico } from '../../util/funcoes/listFunction'
 
 
 @Component({
@@ -92,6 +93,32 @@ export class DashBoardComponent implements OnInit {
     dataPorcentVeiculo.data.datasets[0].data = marcas.dataset
     dataPorcentVeiculo.data.datasets[0].backgroundColor = marcas.backgroundColor
     new Chart ("porcentVeiChart", dataPorcentVeiculo);
+  }
+
+  downloadPlanilha() : void {
+    let marcasPneu = getBrand(this.listPneu)
+    let dataPneu = createDataCsv(marcasPneu,this.listPneu)
+
+    let marcasVeic = getBrand(this.listVeiculo)
+    let dataVeic = createDataCsv(marcasVeic,this.listVeiculo)
+
+    const header = ["Marca","Cadastrados", "Problemas"]
+
+    //planilha veiculos
+    let csv = dataVeic.map(row => header.map(fieldName => JSON.stringify(row[fieldName])).join(','));
+    csv.unshift(header.join(','));
+    let csvArray = csv.join('\r\n');
+
+    var blob = new Blob([csvArray], {type: 'text/csv' })
+    saveAs(blob, "planilha_veiculos.csv");
+
+    //planilha pneus
+    csv = dataPneu.map(row => header.map(fieldName => JSON.stringify(row[fieldName])).join(','));
+    csv.unshift(header.join(','));
+    csvArray = csv.join('\r\n');
+
+    var blob = new Blob([csvArray], {type: 'text/csv' })
+    saveAs(blob, "planilha_pneus.csv");
   }
 
 }

@@ -51,3 +51,28 @@ export function getTimesHistorico (historicos: Historico[]): any{
 
   return data
 }
+
+export function createDataCsv(list:any,veiculos) {
+  let data = []
+
+  for (let i = 0; i < list.dataset.length; i++) {
+    let problems = searchProblem(veiculos,list.labels[i])
+    let object = {
+      "Marca": list.labels[i],
+      "Cadastrados": list.dataset[i],
+      "Problemas": problems
+    }
+    data.push(object)
+  }
+  return data
+}
+
+function searchProblem(veiculos, label) {
+  let res = 0;
+  for (let i = 0; i < veiculos.length; i++) {
+    if (veiculos[i].marca == label) {
+      res += veiculos[i].eventos.length
+    }
+  }
+  return res
+}
