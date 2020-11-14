@@ -7,13 +7,18 @@ var {setDefaultTimeout} = require('cucumber');
 setDefaultTimeout(60 * 1000);
 
 
-async function assertElements(n,value,type) {
+async function assertElements(n,brand,por,lgt) {
 
-    var search = "detail-"+type
-    var allTexts  = await element.all(by.className(search))
-    var sameRes = allTexts.filter(async elem => await elem.getText() == value);
-
-    expect(sameRes.length).to.equal(n)
+    var allTexts = await element.all(by.className('detail-porcentage'))
+    let res = 0
+    for (let i = 0; i < allTexts.length; i++) {
+        let texts = await allTexts[i].all(by.tagName('td'))
+        let textBrand = await texts[0].getText()
+        let textPor = await texts[1].getText()
+        let textLgt = await texts[2].getText()
+        if (textBrand == brand && textPor == por && textLgt == lgt ) res++
+    }
+    expect(res).to.equal(n)
 
 }
 
@@ -88,6 +93,8 @@ defineSupportCode(function ({ Given, When, Then}) {
     Given(/^I see a pie chart with a title of “([^\"]*)”$/, async (tipoChart) => {
         if(tipoChart == "Tipos Pneus") {
             await expect(element(by.id('porcentPneuChart')).isPresent()).to.eventually.equal(true)
+        } else {
+            await expect(element(by.id('porcentVeiChart')).isPresent()).to.eventually.equal(true)
         }
         
     })
@@ -98,6 +105,8 @@ defineSupportCode(function ({ Given, When, Then}) {
 
         if(tipoChart == "Tipos Pneus") {
             await buttons[0].click()
+        } else {
+            await buttons[1].click()
         }
     });
 
@@ -107,6 +116,8 @@ defineSupportCode(function ({ Given, When, Then}) {
             await expect(browser.getCurrentUrl()).to.eventually.equal('http://localhost:4200/dashboard');
         } else if (route == "Visualização Pneus") {
             await expect(browser.getCurrentUrl()).to.eventually.equal('http://localhost:4200/dashboard/pneu');
+        } else if (route == "Visualização Veiculos") {
+            await expect(browser.getCurrentUrl()).to.eventually.equal('http://localhost:4200/dashboard/veiculo');
         }
     });
 
@@ -117,14 +128,21 @@ defineSupportCode(function ({ Given, When, Then}) {
 
     Then(/^A table with "(\d*)" entry with the headings "Marca", "Porcentagem", "Cadastrados", with values of "([^\"]*)", "([^\"]*)", "(\d*)"$/, async (total,marca,prt,rg) => {
         // checar se existe uma entrada do histórico com esses valores
-        await assertElements(1,marca,"brand")
-        await assertElements(1,prt,"por")
-        await assertElements(1,rg,"length")
+        await assertElements(1,marca,prt,rg)
     })
 
     Then(/^I can see a history entry with the values "([^\"]*)", "([^\"]*)", "([^\"]*)", "(\d*)"$/, async (date,op,type,id) => {
         await assertHistory(date,op,type,id.toString())
         
+    })
+
+    Then(/^I can visualize the total of "(\d*)" vehicles registered$/, async (total) => {
+        var text = await element(by.css('.detail-title h3')).getText()
+        await expect(text).include(total.toString())
+    })
+
+    Then(/^"([^\"]*)", "([^\"]*)", "(\d*)"$/, async (marca,prt,rg) => {
+        await assertElements(1,marca,prt,rg)
     })
 
 
