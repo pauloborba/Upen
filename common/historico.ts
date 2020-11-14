@@ -23,6 +23,7 @@ export class Historico {
     }
 
     copyFrom(from: any): void{
+        if(from.timeStamp) this.timeStamp = from.timeStamp;
         this.operacao = from.operacao;
         this.qualElemento = from.qualElemento;
         this.id = from.id;

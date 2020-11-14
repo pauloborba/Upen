@@ -16,9 +16,9 @@
         <th>Cadastrados</th>
       </tr>
       <tr class = "detail-porcentage" *ngFor="let item of data.labels; index as i">
-          <td>{{item}}</td>
-          <td>{{((data.dataset[i]/list.length)*100).toFixed(0)}}%</td>
-          <td>{{data.dataset[i]}}</td>
+          <td class="detail-brand">{{item}}</td>
+          <td class="detail-por">{{((data.dataset[i]/list.length)*100).toFixed(0)}}%</td>
+          <td class="detail-length">{{data.dataset[i]}}</td>
         </tr>
     </table>
   </div>
@@ -33,7 +33,7 @@
     <div class = "detail-historico-entries">
       <div class = "historico" *ngFor="let el of hist">
         <p>
-          {{el.timeStamp | date: 'dd/MM/yyyy'}}:
+          {{el.timeStamp | date: 'dd/MM/yyyy h:mm:ss a'}} :
             {{el.operacao}} {{el.qualElemento}} de <strong>identificação "{{el.id}}"</strong>
         </p>
       </div>

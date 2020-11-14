@@ -19,49 +19,49 @@ export class CadastroHistorico {
         let his7 : Historico = new Historico()
 
         his1.copyFrom({
-        "timeStamp": "1604283720",
+        "timeStamp": "1605184823000",
         "operacao": "Cadastrou",
         "qualElemento": "Pneu",
         "id": "1"
         })
 
         his2.copyFrom({
-        "timeStamp": "1604283720",
+        "timeStamp": "1605192023000",
         "operacao": "Cadastrou",
         "qualElemento": "Pneu",
         "id": "2"
         })
 
         his3.copyFrom({
-        "timeStamp": "1604283721",
+        "timeStamp": "1605192263000",
         "operacao": "Cadastrou",
         "qualElemento": "Veiculo",
         "id": "1"
         })
 
         his4.copyFrom({
-        "timeStamp": "1604283722",
+        "timeStamp": "1605321863000",
         "operacao": "Cadastrou",
         "qualElemento": "Veiculo",
         "id": "2"
         })
 
         his5.copyFrom({
-            "timeStamp": "1604283722",
+            "timeStamp": "1605354263000",
             "operacao": "Cadastrou",
             "qualElemento": "Veiculo",
             "id": "3"
         })
 
         his6.copyFrom({
-        "timeStamp": "1604283723",
+        "timeStamp": "1605352992000",
         "operacao": "Removeu",
         "qualElemento": "Pneu",
         "id": "2"
         })
 
         his7.copyFrom({
-        "timeStamp": "1604283724",
+        "timeStamp": "1605360792000",
         "operacao": "Removeu",
         "qualElemento": "Veiculo",
         "id": "3"
@@ -73,7 +73,6 @@ export class CadastroHistorico {
     cadastrar(id: String, op: String, element: String): Historico{
         var hist = new Historico();
         var result = null;
-        console.log(id)
         if(this.timeStampNaoCadastrado(hist.timeStamp)){
             hist.copyFrom({
               "operacao": op,
@@ -92,6 +91,7 @@ export class CadastroHistorico {
 
     getHistoricos(): Historico[]{
         return this.historicos;
+
     }
 
 }
