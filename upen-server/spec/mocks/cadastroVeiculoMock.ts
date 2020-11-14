@@ -1,5 +1,5 @@
-import { Veiculo } from '../../common/veiculo';
-import { CadastroVeiculo } from '../cadastroVeiculo';
+import { Veiculo } from '../../../common/veiculo';
+import { CadastroVeiculo } from '../../cadastroVeiculo';
 
 export class CadastroVeiculoMock extends CadastroVeiculo {
 

@@ -1,1 +1,42 @@
-<p>dash-board-detail works!</p>
+<div class="dashboard-detail-container">
+  <div class="detail-chart">
+    <canvas id="chart"></canvas>
+  </div>
+  <div class="detail-title">
+    <h3>Quantidade Total Cadastrados: {{list.length}} {{type}}</h3>
+  </div>
+  <div class="detail-divide-container">
+    <div class="detail-divide"></div>
+  </div>
+  <div class="detail-status">
+    <table>
+      <tr>
+        <th>Marca</th>
+        <th>Porcentagem</th>
+        <th>Cadastrados</th>
+      </tr>
+      <tr class = "detail-porcentage" *ngFor="let item of data.labels; index as i">
+          <td>{{item}}</td>
+          <td>{{((data.dataset[i]/list.length)*100).toFixed(0)}}%</td>
+          <td>{{data.dataset[i]}}</td>
+        </tr>
+    </table>
+  </div>
+  <div class="detail-divide-container">
+    <div class="detail-divide"></div>
+  </div>
+  <div class="detail-historico">
+    <h2>Histórico</h2>
+    <div class="detail-divide-container">
+      <div class="detail-divide"></div>
+    </div>
+    <div class = "detail-historico-entries">
+      <div class = "historico" *ngFor="let el of hist">
+        <p>
+          {{el.timeStamp | date: 'dd/MM/yyyy'}}:
+            {{el.operacao}} {{el.qualElemento}} de <strong>identificação "{{el.id}}"</strong>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

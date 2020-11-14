@@ -8,8 +8,8 @@ import { HistoricoService } from 'src/app/services/HistoricoService/historico.se
 import { Historico } from '../../../../../common/historico'
 import { Pneu } from '../../../../../common/pneu'
 import { Veiculo } from '../../../../../common/veiculo'
-import { dataRegister, dataPorcentPneu, dataPorcentVeiculo } from './funcoes/dashboard-chart';
-import { getBrand, getTimeEvents, getTimesHistorico } from './funcoes/listFunction'
+import { dataRegister, dataPorcentPneu, dataPorcentVeiculo } from '../../util/funcoes/dashboard-chart';
+import { getBrand, getTimeEvents, getTimesHistorico } from '../../util/funcoes/listFunction'
 
 
 @Component({

@@ -10,8 +10,8 @@ import { CadastroVeiculo } from './cadastroVeiculo';
 import { CadastroHistorico} from './cadastroHistorico'
 import { CadastroDePneu } from './cadastroPneu';
 import { CadastroFuncionario } from './cadastroFuncionario';
-import { CadastroDePneuMock } from "./mocks/cadastroPneuMock";
-import { CadastroVeiculoMock } from "./mocks/cadastroVeiculoMock";
+import { CadastroDePneuMock } from "./spec/mocks/cadastroPneuMock";
+import { CadastroVeiculoMock } from "./spec/mocks/cadastroVeiculoMock";
 
 const cdHistorico: CadastroHistorico = new CadastroHistorico()
 const cdFuncionario: CadastroFuncionario = new CadastroFuncionario();

@@ -1,4 +1,4 @@
-import { Historico } from '../../../../../../common/historico';
+import { Historico } from '../../../../../common/historico';
 
 
 function getRandomColor() {
