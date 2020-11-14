@@ -1,11 +1,13 @@
 import { defineSupportCode } from 'cucumber';
 import { browser, $, element, ElementArrayFinder, by } from 'protractor';
+let fs = require('fs');
 let chai = require('chai').use(require('chai-as-promised'));
 let expect = chai.expect;
 
 var {setDefaultTimeout} = require('cucumber');
 setDefaultTimeout(60 * 1000);
 
+const homedir = require('os').homedir();
 
 async function assertElements(n,brand,por,lgt) {
 
@@ -145,5 +147,22 @@ defineSupportCode(function ({ Given, When, Then}) {
         await assertElements(1,marca,prt,rg)
     })
 
+    Given(/^I see a option of generate "Grafico de testes”$/, async () => {
+        await expect(element(by.css('.button-container button')).isPresent()).to.eventually.equal(true)
+    })
+
+    When(/^I ask to the system to generate "Grafico de testes"$/, async () => {
+        await expect(element(by.css('.button-container button')).click())
+    })
+
+    Then(/^I continued in the page “Relatório de Pesquisa”$/, async () => {
+        await expect(browser.getCurrentUrl()).to.eventually.equal('http://localhost:4200/dashboard');
+    })
+
+    Then(/^The system downloaded in my workspace two files named "planilha_pneus.csv” and "planilha_veiculos.csv"$/, async () => {
+        await browser.sleep(3000)
+        expect(fs.existsSync(homedir+'/Downloads/planilha_veiculos.csv')).to.equal(true)
+        expect(fs.existsSync(homedir+'/Downloads/planilha_pneus.csv')).to.equal(true)
+    })
 
 })

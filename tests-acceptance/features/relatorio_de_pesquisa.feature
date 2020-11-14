@@ -34,3 +34,10 @@ And I can see a history entry with the values "14/11/2020 10:33:12 AM", "Removeu
 And I can see a history entry with the values "14/11/2020 8:44:23 AM", "Cadastrou", "Veiculo", "3"
 And I can see a history entry with the values "13/11/2020 11:44:23 PM", "Cadastrou", "Veiculo", "2"
 And I can see a history entry with the values "12/11/2020 11:44:23 AM", "Cadastrou", "Veiculo", "1"
+
+Scenario: Generate Tests Files
+Given I'm in page “Relatorio de Pesquisa”
+And I see a option of generate "Grafico de testes”
+When I ask to the system to generate "Grafico de testes"
+Then I continued in the page “Relatório de Pesquisa”
+And The system downloaded in my workspace two files named "planilha_pneus.csv” and "planilha_veiculos.csv"
