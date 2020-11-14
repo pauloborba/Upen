@@ -13,3 +13,9 @@ Given I am at the "Vehicles List" page
 Given I can see a vehicle with registration plate "RJR1652" in the vehicles list
 When I try to delete vehicle with plate "RJR1652"
 Then I can no longer see vehicle with plate "RJR1652" in the vehicles list
+
+Scenario: Restoring vehicle from the Trash
+Given Vehicle with registration plate "RJR7751" is in the "VihecleTrashList"
+Given I am at the "VihecleTrashList" page
+When I try to restore the vehicle with plate "RJR7751"
+Then I can no longer see vehicle with plate "RJR7751" in the "VihecleTrashList"
