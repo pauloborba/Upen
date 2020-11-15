@@ -8,17 +8,7 @@ export class CadastroVeiculo {
      veiculos: Veiculo[] = [];
      pneus: Pneu[] = this.cdPneuMock.getPneus();
 
-     cadastrarVeiculo(veiculoCadastro: Veiculo): any {
-          let veiculo: Veiculo = this.veiculos.find(veil => veil.placa == veiculoCadastro.placa);
-          if (!veiculo) {
-               this.veiculos.push(veiculoCadastro);
-               return "Veiculo cadastrado";
-          }
-
-          return null;
-     }
-
-     cadastrarVeiculoMock() {
+     cadastrarVeiculoMock(): any {
           for(let i = 0; i < 5; i++){
                let veiculo = new Veiculo();
                veiculo.placa = "PDY" + i.toString() + (i+1).toString() + (i+2).toString() + (i+3).toString();
@@ -31,8 +21,8 @@ export class CadastroVeiculo {
      }
 
      removerVeiculo(placa: string): any {
-          let veiculo: Veiculo = this.veiculos.find(veil => veil.placa = placa);
-          let index: number = this.veiculos.findIndex(veil => veil.placa = placa);
+          let veiculo: Veiculo = this.veiculos.find(veil => veil.placa == placa);
+          let index: number = this.veiculos.findIndex(veil => veil.placa == placa);
           if (!veiculo)
                return null;
 
@@ -41,23 +31,9 @@ export class CadastroVeiculo {
      }
 
      retornarVeiculo(placa: string): any {
+          this.cadastrarVeiculoMock();
           let veiculo: Veiculo = this.veiculos.find(veil => veil.placa == placa);
           return veiculo;
-     }
-
-     atualizarVeiculo(veiculo: Veiculo): Veiculo {
-          var result: Veiculo = this.veiculos.find(veil => veil.placa == veiculo.placa);
-          var auxresult = new Veiculo();
-
-          if (result) {
-               auxresult.clone(veiculo);
-               this.removerVeiculo(result.placa);
-               this.cadastrarVeiculo(auxresult);
-
-               return auxresult;
-          }
-
-          return null;
      }
 
      atribuirPneu(placa: string, pneu_id: string): Veiculo {
@@ -88,5 +64,4 @@ export class CadastroVeiculo {
 
           return null;
      }
-
 }

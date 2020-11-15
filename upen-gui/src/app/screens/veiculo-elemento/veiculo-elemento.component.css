@@ -48,15 +48,20 @@
     margin-top: 15px;
 }
 
-.add-veiculo {    
+.mostrar {
+    margin-bottom: 4px;
+}
+
+.buttons {    
     height: 40px;
     width: 40px;
     margin-top: 10px;
+    margin-right: 3px;
     display: inline-block;
     float: right;
 }
 
-.add-veiculo #cad {
+.buttons .cad {
     border-radius: 20px;
 }
 

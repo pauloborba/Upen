@@ -7,7 +7,7 @@ export class Veiculo {
     modelo: string;
     funcao: string;
     pneus: Pneu[];
-    eventos: string; //[data, mensagem, preço]
+    eventos: [string, string, number][]; //[data, mensagem, preço]
 
     constructor(){
         this.clean();
@@ -17,9 +17,15 @@ export class Veiculo {
         this.marca = "";
         this.ano = 0;
         this.placa = "";
-        this.modelo = "";
-        this.funcao = "";
-        this.eventos = "";
+        this.modelo = "Gol";
+        this.funcao = "Revisao";
+        this.eventos = [
+            [
+                "15/11/2020",
+                "Veiculo entrando para revisao",
+                100
+            ]
+        ]
         this.pneus = [];
     }
 

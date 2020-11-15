@@ -30,4 +30,9 @@ export class CadastroDePneuMock extends CadastroDePneu {
     getPneus(): Pneu[]{
          return this.pneus
     }
+
+    getPneu(id: string): Pneu {
+        let pneu: Pneu = this.pneus.find(pneu => pneu.id == id);
+        return pneu;
+    }
 }

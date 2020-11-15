@@ -20,7 +20,7 @@ const cdPneuMock: CadastroDePneuMock = new CadastroDePneuMock();
 
 // ROTAS DE LISTA PNEU / PNEU ELEMENTO
 
-routes.get('/pneus/:id', function (req: Request, res: Response) {
+routes.get('/pneus/', function (req: Request, res: Response) {
   res.send(JSON.stringify(cdPneu.getPneu(req.params.id)));
 })
 
@@ -74,18 +74,6 @@ routes.get('/veiculos', (req: Request, res: Response) => {
   res.send(JSON.stringify(cdVeiculo.listarVeiculos()));
 });
 
-routes.post('/veiculos', (req: Request, res: Response) => {
-  var vel: Veiculo = <Veiculo>req.body;
-  var veiculo = cdVeiculo.cadastrarVeiculo(vel);
-  if (veiculo) {
-    var historico = cdHistorico.cadastrar(vel.placa, "Cadastrou", "Veiculo");
-    if (historico) { res.send({ veiculo }); }
-    else { res.status(404).send({ "falha": "Cadastro de veiculo falhou" }); }
-  }
-  else
-    res.status(404).send({ "falha": "Cadastro de veiculo falhou" });
-})
-
 routes.delete('/veiculos/:id', function (req: Request, res: Response) {
   var id = req.params.id;
   var index = cdVeiculo.removerVeiculo(id);
@@ -133,34 +121,33 @@ routes.delete('/funcionarios/:id', (req: Request, res: Response) => {
 });
 
 // ROTAS VEICULO ELEMENTO
-
 routes.get('/veiculo/:placa', (req: Request, res: Response) => {
   var placa: string = String(req.params.placa);
 
   var veiculo: Veiculo = cdVeiculo.retornarVeiculo(placa);
   if (!veiculo) res.status(404).send({ "erro": "Veiculo nao cadastrado!" });
 
-  res.send({ veiculo });
+  res.send(veiculo);
 });
 
-routes.put('/veiculo/:placa', (req: Request, res: Response) => {
+routes.put('/veiculo/:placa/:id', (req: Request, res: Response) => {
   var placa: string = String(req.params.placa);
-  var id: string = String(req.query.id);
+  var id: string = String(req.params.id);
 
   var veiculo: Veiculo = cdVeiculo.atribuirPneu(placa, id);
   if (!veiculo) res.status(404).send({ "erro": "Nao foi possivel atribuir o pneu!" });
 
-  res.send({ veiculo });
+  res.send(veiculo);
 });
 
-routes.put('/veiculo/pneu/:placa', (req: Request, res: Response) => {
+routes.put('/veiculo/pneu/:placa/:id', (req: Request, res: Response) => {
   var placa: string = String(req.params.placa);
-  var id: string = String(req.query.id);
+  var id: string = String(req.params.id);
 
   var veiculo: Veiculo = cdVeiculo.desatribuirPneu(placa, id);
   if (!veiculo) res.status(404).send({ "erro": "Nao foi possivel desatribuir o pneu!" });
 
-  res.send({ veiculo });
+  res.send(veiculo);
 });
 
 routes.delete('/veiculo/:placa', (req: Request, res: Response) => {
@@ -169,16 +156,7 @@ routes.delete('/veiculo/:placa', (req: Request, res: Response) => {
   var veiculo: Veiculo = cdVeiculo.removerVeiculo(placa);
   if (!veiculo) res.status(400).json({ "erro": "Veiculo nao cadastrado!" });
 
-  res.send({ "alert": "Veiculo deletado com sucesso!" });
-});
-
-routes.post('/veiculo', (req: Request, res: Response) => {
-  var veiculocadastro: Veiculo = <Veiculo>req.body;
-
-  var veiculo: Veiculo = cdVeiculo.cadastrarVeiculo(veiculocadastro);
-  if (!veiculo) res.status(400).send({ "erro": "Veiculo ja cadastrado!" });
-
-  res.send({ "alert": "Veiculo cadastrado com sucesso" });
+  res.send(veiculo);
 });
 
 // ROTAS MOCK
