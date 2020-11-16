@@ -10,13 +10,13 @@
         <p *ngFor="let pneu of veiculo.pneus">ID do pneu: {{pneu.id}}</p>
       </div>
       <div class="buttons"> 
-        <button class="cad" mat-mini-fab color="black" (click)="openAttDialog()">+</button>
+        <button id="atribuir-dialog-btn" class="cad" mat-mini-fab color="black" (click)="openAttDialog()">+</button>
       </div>
       <div class="buttons">
-      <button class="cad" mat-mini-fab color="black" (click)="openDstDialog()">-</button>
+      <button id="desatribuir-dialog-btn" class="cad" mat-mini-fab color="black" (click)="openDstDialog()">-</button>
       </div>
       <div class="buttons">
-        <button class="cad" mat-mini-fab color="black" (click)="deletarVeiculo()">Deletar</button>
+        <button name="deletar-btn" class="cad" mat-mini-fab color="black" (click)="deletarVeiculo()">Deletar</button>
       </div>
       <div class="log">
         <div *ngFor="let evento of eventos">{{evento}}</div>

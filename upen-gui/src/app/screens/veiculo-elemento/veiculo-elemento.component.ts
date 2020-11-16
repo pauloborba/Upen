@@ -54,9 +54,9 @@ export class VeiculoElementoComponent implements OnInit {
       veiculo => {
         console.log(veiculo);
         if(veiculo.placa == this.veiculo.placa)
-          console.log("Veiculo deletado com sucesso");
+          alert("Veiculo deletado com sucesso");
         else
-          console.log("Veiculo nao foi deletado");
+          alert("Veiculo nao foi deletado");
       }
     )
   }
