@@ -17,6 +17,7 @@ export class VeiculoElementoComponent implements OnInit {
   attPneuForm: MatDialogRef<CadastroForm>
   dstPneuForm: MatDialogRef<DstPneuFormComponent>
 
+  showLog: boolean = false;
   placa: string = "";
   listaPneus: Pneu[] = [];
   eventos: [string, string, number];
@@ -111,6 +112,10 @@ export class VeiculoElementoComponent implements OnInit {
           )
       }
     )
+  }
+
+  setLogTrue() {
+    this.showLog = true;
   }
 
 }

@@ -18,7 +18,10 @@
       <div class="buttons">
         <button name="deletar-btn" class="cad" mat-mini-fab color="black" (click)="deletarVeiculo()">Deletar</button>
       </div>
-      <div class="log">
+      <div class="buttons">
+        <button name="log-btn" class="cad" mat-mini-fab color="black" (click)="setLogTrue()">Log</button>
+      </div>
+      <div class="log" *ngIf="showLog">
         <div *ngFor="let evento of eventos">{{evento}}</div>
       </div>
     </div>
