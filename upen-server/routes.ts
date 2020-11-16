@@ -10,11 +10,13 @@ import { CadastroVeiculo } from './cadastroVeiculo';
 import { CadastroHistorico} from './cadastroHistorico'
 import { CadastroDePneu } from './cadastroPneu';
 import { CadastroFuncionario } from './cadastroFuncionario';
+import { CadastroVeiculoMock } from "./cadastroVeiculoMock";
 
 const cdHistorico: CadastroHistorico = new CadastroHistorico()
 const cdFuncionario: CadastroFuncionario = new CadastroFuncionario();
 const cdPneu: CadastroDePneu = new CadastroDePneu();
 const cdVeiculo: CadastroVeiculo = new CadastroVeiculo(); 
+const cdVeiculoMock: CadastroVeiculoMock = new CadastroVeiculoMock
 
 // ROTAS DE LISTA PNEU / PNEU ELEMENTO
 
@@ -114,8 +116,37 @@ routes.post('/funcionarios', (req: Request, res: Response) => {
     if (funcionario) {
       res.send({"success": "o funcionario foi devidamente cadastrado."});
     } else {
-        res.status(404).send({"failure": "o funcionario nao pode ser cadastrado"});
+        res.send({"failure": "o funcionario nao pode ser cadastrado"});
     }
+
+});
+
+routes.put('/funcionarios/:id', (req: Request, res: Response) => {
+  var id = req.params.id;
+  var veiculo = <Veiculo> req.body;
+
+  var atrib = cdFuncionario.atribuirVeiculo(id, veiculo)
+
+  if (atrib) {
+    res.send({"success": "o veiculo foi devidamente atribuido."});
+  } else {
+    res.send({"failure": "o veiculo nao pode ser atribuido"});
+  }
+
+});
+
+routes.put('/funcionarios/:id/:placa', (req: Request, res: Response) => {
+  var id = req.params.id;
+  var placa = req.params.placa;
+  var veiculo = <Veiculo> req.body;
+
+  var atrib = cdFuncionario.desatribuirVeiculo(id, veiculo)
+
+  if (atrib) {
+    res.send({"success": "o veiculo foi devidamente desatribuido."});
+  } else {
+    res.send({"failure": "o veiculo nao pode ser desatribuido"});
+  }
 
 });
 
@@ -125,7 +156,7 @@ routes.delete('/funcionarios/:id', (req: Request, res: Response) => {
   if (aux) {
     res.send({"success" : "o funcionario foi devidamente removido."})
   } else{
-    res.status(404).send({"failure": "o funcionario nao pode ser cadastrado"});
+    res.send({"failure": "o funcionario nao pode ser removido"});
   }
 
 });
@@ -149,5 +180,9 @@ routes.get('/veiculo', (req: Request, res: Response) => {
 
     res.send({ veiculo });
 });
+
+routes.get('/veiculosMock', (req: Request, res: Response) => {
+  res.send(JSON.stringify(cdVeiculoMock.listarVeiculos()))
+})
 
 export { routes };

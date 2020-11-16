@@ -3,7 +3,7 @@ import { NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MaterialModule } from './material.module';
 import { RouterModule }   from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -16,6 +16,8 @@ import { FuncionarioComponent } from './screens/funcionario/funcionario.componen
 import { ListaVeiculoComponent } from './screens/lista-veiculo/lista-veiculo.component';
 import { PneuElementoComponent } from './screens/pneu-elemento/pneu-elemento.component';
 import { VeiculoElementoComponent } from './screens/veiculo-elemento/veiculo-elemento.component';
+import { DialogCadastro } from './screens/funcionario/dialogs/dialog-cadastro.component'
+import { DialogAtribuir } from './screens/funcionario/dialogs/dialog-atribuir.component'
 
 // servicos
 import { HistoricoService } from './services/HistoricoService/historico.service';
@@ -39,11 +41,13 @@ import { VeiculoElementoService } from './services/VeiculoElementoService/veicul
     DashBoardComponent,
     DashBoardDetailComponent,
     ListaPneusComponent,
+    DialogCadastro,
+    DialogAtribuir
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
