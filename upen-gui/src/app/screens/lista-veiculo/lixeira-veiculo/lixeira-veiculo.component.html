@@ -32,7 +32,7 @@
                 <table *ngFor="let a of pickOne(), let i = index" >
                         <div class="blocoPosition">
                             <tr name="vehicleTrashList">
-                                <a href="https://www.youtube.com/watch?v=kfSQkZuIx84">
+                                <a routerLink="/veiculos/{{a.placa}}" routerLinkActive="active-button">
                                     <div class="bloco">
                                             <div class="divVeiculoInfo"><td class="veiculoInfo" name="placalist">{{displayData(a.placa)}}</td></div>
                                             <div class="divVeiculoInfo"><td class="veiculoInfo" name="modelolist">{{displayData(a.modelo)}}</td></div>

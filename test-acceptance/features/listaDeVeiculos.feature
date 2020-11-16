@@ -19,3 +19,9 @@ Given Vehicle with registration plate "RJR7751" is in the "VihecleTrashList"
 Given I am at the "VihecleTrashList" page
 When I try to restore the vehicle with plate "RJR7751"
 Then I can no longer see vehicle with plate "RJR7751" in the "VihecleTrashList"
+
+Scenario: Searching vehicle in the list
+Given I am at the "Vehicles List" page
+Given There is only one vehicle with "RJR4421" in their text fields in the vehicles list
+When I type "RJR4421" in the "SearchBar"
+Then the vehicle with registration plate "RJR4421" is the only one displayed in the list

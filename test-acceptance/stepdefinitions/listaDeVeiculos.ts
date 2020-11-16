@@ -108,9 +108,6 @@ defineSupportCode(function ({ Given, When, Then }) {
         await register(placa.toString(), "488", "Ferrari", "2020", "Tunagem");
         await element(by.name('botaoFecharPopUp')).click();
         await deleteVehicle(placa);
-
-
-
     })
 
     When(/^I try to restore the vehicle with plate "([^\"]*)"$/, async (placa) => {
@@ -131,6 +128,39 @@ defineSupportCode(function ({ Given, When, Then }) {
         await sameplacas.then(elems => expect(Promise.resolve(elems.length)).to.eventually.equal(0));   
     })
 
+
+    Given(/^all other vehicles in the list do not have "([^\"]*)" in their text fields$/,async (placa) =>{
+        var allveiculos : ElementArrayFinder = element.all(by.name('vehiclelist'));
+        var sameplacas = allveiculos.filter(elem =>
+            elem.getText().then(text => text.includes(placa.toString())));
+        await sameplacas.then(elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));     
+    })
+
+    Given(/^There is only one vehicle with "([^\"]*)" in their text fields in the vehicles list$/, async(placa) =>{
+        await register( placa.toString(), "Uno", "Fiat", "2014", "Revisão");
+
+        await element(by.name('botaoFecharPopUp')).click();
+
+        var allveiculos : ElementArrayFinder = element.all(by.name('vehiclelist'));
+        var sameplacas = allveiculos.filter(elem =>
+            elem.getText().then(text => text.includes(placa.toString())));
+        await sameplacas.then(elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));   
+    })
+
+
+
+    When(/^I type "([^\"]*)" in the "SearchBar"$/, async(placa) =>{
+        await $("input[name='searchBar']").sendKeys(<string> placa);
+    })
+
+
+    Then(/^the vehicle with registration plate "([^\"]*)" is the only one displayed in the list$/, async (placa) => {
+        var allveiculos : ElementArrayFinder = element.all(by.name('vehiclelist'));
+        allveiculos.then( elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
+        var sameplacas = allveiculos.filter(elem =>
+            elem.getText().then(text => text.includes(placa.toString())));
+        sameplacas.then( elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
+    })
 
 
 })
