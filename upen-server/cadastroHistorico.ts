@@ -73,7 +73,7 @@ export class CadastroHistorico {
     cadastrar(id: String, op: String, element: String): Historico{
         var hist = new Historico();
         var result = null;
-        if(this.timeStampNaoCadastrado(hist.timeStamp)){
+        if(this.checkIfOposite(id,op,element)){
             hist.copyFrom({
               "operacao": op,
               "qualElemento": element,
@@ -85,13 +85,39 @@ export class CadastroHistorico {
         return result;
     }
 
-    timeStampNaoCadastrado(timeStamp: Number): boolean{
-        return !this.historicos.find(a => a.timeStamp == timeStamp);
+    checkIfOposite(id: String, op: String, element: String) {
+        let opSearch;
+        if (op == "Removeu") opSearch = "Cadastrou";
+        else opSearch = "Removeu";
+        return this.searchOp(id,op,element,opSearch,false)
+    }
+
+    searchOp(id: String, op: String, element: String, opSearch: String, isDelete: boolean): boolean {
+        for (let i = this.historicos.length-1; i >= 0; i--) {
+            if (this.historicos[i].id == id && this.historicos[i].qualElemento == element) {
+                if (opSearch == this.historicos[i].operacao) return true;
+                else return false || isDelete
+            }
+        }
+        return (op == "Removeu" ? false: true)
+    }
+
+    deleteHistorico(id:String, op:String, element: String, timeStamp: Number) {
+        let opSearch;
+        if (op == "Removeu") opSearch = "Cadastrou";
+        else opSearch = "Removeu";
+        let index = this.searchOp(id,op,element,opSearch,true)
+        if (index) { // se não tem dependencias podemos remover
+            this.historicos = this.historicos.filter(el => {
+               return !(el.id == id && el.operacao == op && el.qualElemento == element && el.timeStamp == timeStamp)
+            });
+            return opSearch;
+        }
+        return null;
     }
 
     getHistoricos(): Historico[]{
         return this.historicos;
-
     }
 
 }
