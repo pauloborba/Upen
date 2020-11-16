@@ -19,3 +19,8 @@ When I click the button to unassign "-"
 And I enter the tire's ID  "2" 
 And Press the button to unassing "Desatribuir"
 Then I cannot see the tire's ID on the page of vehicle with plate "PDY2345"
+
+Scenario: Visualize vehicle's log
+Given I'm in page of the vehicle with plate  "PDY2345"
+When I click the button to visualize the log "Log"
+Then The log shows on the screen of vehicle with plate "PDY2345"

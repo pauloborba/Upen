@@ -66,5 +66,18 @@ defineSupportCode(function ({Given, When, Then}) {
         await browser.get("http://localhost:4200/veiculos/" + plate);
     })
 
+
+
+    Given(/^I'm in page of the vehicle with plate  "([^\"]*)"$/, async (plate) => {
+        await browser.get("http://localhost:4200/veiculos/" + plate);
+    })
+
+    When(/^I click the button to visualize the log "([^\"]*)"$/, async (btn) => {
+        await element.all(by.name('log-btn')).click();
+    })
+
+    Then(/^The log shows on the screen of vehicle with plate "([^\"]*)"$/, async (plate) => {
+        await expect(browser.getCurrentUrl()).to.eventually.equal('http://localhost:4200/veiculos/' + plate);
+    })
 })
 
