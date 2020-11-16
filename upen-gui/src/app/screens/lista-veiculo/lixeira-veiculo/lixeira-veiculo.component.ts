@@ -12,10 +12,12 @@ import { DialogPermanentRemoval } from "./Dialog/DialogPermanentRemoval";
 export class LixeiraVeiculoComponent implements OnInit {
 
   lixeira: Veiculo[];
+  searchInput: string;
 
   constructor( private listaVeiculoService: ListaVeiculoService , public dialog: MatDialog ) { }
 
   ngOnInit(): void {
+    this.searchInput = "";
     this.listarLixeira();
   }
 
@@ -83,4 +85,25 @@ export class LixeiraVeiculoComponent implements OnInit {
       );
     }
 
+    match(s: Veiculo): boolean{
+      let str = this.searchInput.toLowerCase();
+      for(let x in s){
+        console.log(s[x].toString());
+        if(s[x].toString().toLowerCase().includes(str)){
+          return true;
+        }
+      }
+      return false;
+    }
+  
+  
+    generateMatchingList(): Veiculo[]{
+      return this.lixeira.filter( elem => this.match(elem) );
+    }
+  
+    pickOne(): Veiculo[]{
+      if(this.searchInput.trim() == "")
+        return this.lixeira;
+      return this.generateMatchingList();
+    }
 }

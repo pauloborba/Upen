@@ -15,7 +15,7 @@ export class ListaVeiculoComponent implements OnInit {
   popupCadastro: boolean;
   placaDuplicada: boolean;
   botaoCadastrarPressionado: boolean;
-  
+  searchInput: string;
   year = new Date();
   constructor( private listaVeiculoService: ListaVeiculoService ) { }
   
@@ -24,6 +24,7 @@ export class ListaVeiculoComponent implements OnInit {
     this.popupCadastro = false;
     this.resetBotaoCadastrar();
     this.anoAuxiliar = "";
+    this.searchInput = "";
     this.listarVeiculos();
   }
 
@@ -153,6 +154,28 @@ export class ListaVeiculoComponent implements OnInit {
 
   empty(): boolean{
     return (this.veiculos.length == 0)
+  }
+
+  match(s: Veiculo): boolean{
+    let str = this.searchInput.toLowerCase();
+    for(let x in s){
+      console.log(s[x].toString());
+      if(s[x].toString().toLowerCase().includes(str)){
+        return true;
+      }
+    }
+    return false;
+  }
+
+
+  generateMatchingList(): Veiculo[]{
+    return this.veiculos.filter( elem => this.match(elem) );
+  }
+
+  pickOne(): Veiculo[]{
+    if(this.searchInput.trim() == "")
+      return this.veiculos;
+    return this.generateMatchingList();
   }
 
 }

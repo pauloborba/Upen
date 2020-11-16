@@ -416,3 +416,23 @@ input[type=number] {
     /*width: 44px;
     height: 44px;*/
 }
+
+.active-pink-2 input.form-control[type=text]:focus:not([readonly]) {
+    border-bottom: 1px solid #f48fb1;
+    box-shadow: 0 1px 0 0 #f48fb1;
+  }
+
+.searchBarDiv{
+    
+    justify-content: center;
+
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    right: 0;
+}
+
+.searchIcon{
+    color: #4d4d4d;
+    color: lightgrey;
+}
