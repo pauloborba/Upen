@@ -14,8 +14,8 @@ And Press the button to assign "Atribuir"
 Then I can see the tire's ID on the page of vehicle with plate "PDY2345"
 
 Scenario: Unassign a tire from a vehicle
-Given I'm in page of vehicle with plate "PDY2345"
+Given I'm in page of the vehicle with plate "PDY2345" 
 When I click the button to unassign "-"
-And I enter the tire's ID "2"
+And I enter the tire's ID  "2" 
 And Press the button to unassing "Desatribuir"
 Then I cannot see the tire's ID on the page of vehicle with plate "PDY2345"

@@ -44,5 +44,27 @@ defineSupportCode(function ({Given, When, Then}) {
         await browser.get("http://localhost:4200/veiculos/" + plate);
     })
 
+
+    Given(/^I'm in page of the vehicle with plate "([^\"]*)"$/, async (plate) => {
+        await browser.get("http://localhost:4200/veiculos/" + plate);
+    })
+
+    When(/^I click the button to unassign "([^\"]*)"$/, async (btn) => {
+        await element.all(by.name('desatribuir-dialog-btn')).click();
+    })
+
+    When(/^I enter the tire's ID  "([^\"]*)"$/, async (tireID) => {
+        var id: string = tireID.toString();
+        await element.all(by.name('desatribuir-input')).sendKeys(id);
+    })
+
+    When(/^Press the button to unassing "([^\"]*)"$/, async (btn) => {
+        await element.all(by.name('desatribuir-btn')).click();
+    })
+
+    Then(/^I cannot see the tire's ID on the page of vehicle with plate "([^\"]*)"$/, async (plate) => {
+        await browser.get("http://localhost:4200/veiculos/" + plate);
+    })
+
 })
 
