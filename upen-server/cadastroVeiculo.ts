@@ -6,7 +6,7 @@ export class CadastroVeiculo {
      lixeiraVeiculos: Veiculo[] = [];
 
      cadastrarVeiculo(veiculo: Veiculo): any {
-          if(this.veiculoNaoCadastrado(veiculo.placa, this.veiculos)){
+          if(this.ehVeiculo(veiculo) && this.veiculoNaoCadastrado(veiculo.placa, this.veiculos)){
                this.veiculos.push(veiculo);
                return veiculo;
           }
@@ -27,7 +27,7 @@ export class CadastroVeiculo {
 
 
      empty(): boolean{
-          return this.veiculos.length > 0;
+          return this.veiculos.length == 0;
      }
 
      removerVeiculo(placa: string): number{
@@ -70,5 +70,27 @@ export class CadastroVeiculo {
                }
           }
           return -1;
+     }
+
+     isUndefined(x:any){
+          return (x == undefined);
+     }
+
+     ehVeiculo(v:any){
+          
+          if(this.isUndefined(v.ano) || this.isUndefined(v.marca) || this.isUndefined(v.modelo) ||
+           this.isUndefined(v.funcao) || this.isUndefined(v.placa) || this.isUndefined(v.pneus) || this.isUndefined(v.eventos)){
+               return false;
+          }
+
+          let veiculoAuxiliar:Veiculo = new Veiculo();
+
+          for(let x in veiculoAuxiliar){
+               if(typeof(veiculoAuxiliar[x]) != typeof(v[x]) ){
+                    return false;
+               }
+          }
+
+          return true;
      }
 }

@@ -97,8 +97,6 @@
                                     <td>
                                         <input class="inputTextCadastro" type="text" placeholder="Marca" name="marcabox"  [(ngModel)]="veiculo.marca">
                                     </td>
-                                    <!-- <div  class="divNaopreenchido">
-                                    </div> -->
 
                                     <td *ngIf = "checkNotFilled(veiculo.marca) && botaoCadastrarPressionado"  class="campoNaoPreenchido" >
                                         Insira a marca
@@ -132,12 +130,6 @@
                         </table>
                     </div>
                     <button type="button" class="botaoCadastrar" (click)="criar()" name="botaoCadastrar" data-dismiss="modal">Cadastrar</button> 
-
-                    <!-- Modal footer -->
-                    <!--
-                    <div class="modal-footer">
-                    <button type="button" class="botaoCadastrar" (click)="fecharPopup()"  data-dismiss="modal">Cadastrar</button>
-                    </div> -->
             
                 </div>
             </div>

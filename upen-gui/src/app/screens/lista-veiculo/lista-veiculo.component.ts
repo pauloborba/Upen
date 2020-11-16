@@ -159,7 +159,6 @@ export class ListaVeiculoComponent implements OnInit {
   match(s: Veiculo): boolean{
     let str = this.searchInput.toLowerCase();
     for(let x in s){
-      console.log(s[x].toString());
       if(s[x].toString().toLowerCase().includes(str)){
         return true;
       }

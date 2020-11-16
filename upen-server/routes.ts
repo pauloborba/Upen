@@ -96,7 +96,7 @@ routes.delete('/veiculos/:id', function(req: Request, res: Response){
     }
   })
 
-  routes.get('/lixeiraveiculos', (req: Request, res: Response) => { 
+routes.get('/lixeiraveiculos', (req: Request, res: Response) => { 
     res.send(JSON.stringify(cdVeiculo.listarLixeira()));
 });
 
