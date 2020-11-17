@@ -1,10 +1,13 @@
 import { CadastroVeiculo } from '../cadastroVeiculo';
 import { Veiculo } from '../../common/veiculo';
+import { Pneu } from '../../common/pneu';
 
 describe("O cadastro de veiculo", () => {
   var cadastro: CadastroVeiculo = new CadastroVeiculo();
 
-  it("é inicialmente vazio", () => {
+  beforeEach(() => {cadastro = new CadastroVeiculo()});
+
+  it("possui inicialmente 5 veiculos", () => {
     expect(cadastro.listarVeiculos().length).toBe(5);
   })
 
@@ -51,7 +54,7 @@ describe("O cadastro de veiculo", () => {
 
   it("retorna um veiculo cadastrado corretamente", () => {
     var veiculo: Veiculo = new Veiculo();
-    veiculo.placa = "RJX6236";
+    veiculo.placa = "RPT4464";
     veiculo.modelo = "Corcel";
     veiculo.marca = "Ford";
     veiculo.ano = 1973;
@@ -62,5 +65,55 @@ describe("O cadastro de veiculo", () => {
     var veiculoReturn: Veiculo = cadastro.removerVeiculo(veiculo.placa);
 
     expect(veiculoReturn.placa).toBe(veiculo.placa);
+  })
+
+  it("atribui um pneu a um veiculo corretamente", () => {
+    var pneu: Pneu = new Pneu();
+    pneu.id = "1";
+    var veiculo: Veiculo = new Veiculo();
+    veiculo.placa = "RPX4464";
+    veiculo.modelo = "Corcel";
+    veiculo.marca = "Ford";
+    veiculo.ano = 1973;
+    veiculo.funcao = "Revisão";
+
+    cadastro.cadastrarVeiculo(veiculo);
+    cadastro.atribuirPneu(veiculo.placa, pneu.id);
+
+    expect(veiculo.pneus.length).toBe(1);
+  })
+
+  it("desatribui um pneu a um veiculo corretamente", () => {
+    var pneu: Pneu = new Pneu();
+    pneu.id = "1";
+    var veiculo: Veiculo = new Veiculo();
+    veiculo.placa = "RJX4464";
+    veiculo.modelo = "Corcel";
+    veiculo.marca = "Ford";
+    veiculo.ano = 1973;
+    veiculo.funcao = "Revisão";
+
+    cadastro.cadastrarVeiculo(veiculo);
+    cadastro.atribuirPneu(veiculo.placa, pneu.id);
+
+    expect(veiculo.pneus.length).toBe(1);
+
+    cadastro.desatribuirPneu(veiculo.placa, pneu.id);
+    expect(veiculo.pneus.length).toBe(0);
+  })
+
+  it("deleta um veiculo da lista corretamente", () => {
+    var veiculo: Veiculo = new Veiculo();
+    veiculo.placa = "RPT4464";
+    veiculo.modelo = "Corcel";
+    veiculo.marca = "Ford";
+    veiculo.ano = 1973;
+    veiculo.funcao = "Revisão";
+
+    cadastro.cadastrarVeiculo(veiculo);
+    expect(cadastro.listarVeiculos().length).toBe(6);
+
+    cadastro.removerVeiculo(veiculo.placa);
+    expect(cadastro.listarVeiculos().length).toBe(5);
   })
 })
