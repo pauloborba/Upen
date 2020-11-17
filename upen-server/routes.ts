@@ -30,8 +30,7 @@ routes.post('/pneu', function (req: Request, res: Response) {
   var confirmar: Pneu = <Pneu> req.body;
   var pneu = cdPneu.cadastrar(confirmar);
   if(pneu == "success"){
-    //var historico = cdHistorico.cadastrar(confirmar.id,"Cadastrou","Pneu");
-    var historico = true;  
+    var historico = cdHistorico.cadastrar(confirmar.id,"Cadastrou","Pneu");  
     if (historico) {res.send({"success": "cadastro de pneu com sucesso"});}
   } else {
     res.send({"failed": "cadastro de pneu falhou"});
@@ -53,8 +52,7 @@ routes.delete('/pneu/:id', function (req: Request, res: Response){
 var id = req.params.id
   var aux = cdPneu.remover(id);
   if(aux == "success"){
-    //var historico = cdHistorico.cadastrar(id,"Removeu","Pneu"); 
-    var historico = true; 
+    var historico = cdHistorico.cadastrar(id,"Removeu","Pneu"); 
     if (historico) {res.send({"success": "O pneu foi removido com sucesso"})}
   } else {
     res.send({"failure": "O pneu não pode ser removido"});
@@ -73,9 +71,8 @@ routes.delete('/lixeirapneus/:id', function(req: Request, res: Response){
   var id = req.params.id;
   var index = cdPneu.removerPermanente(id);
   if(index != null){
-      //res.send({"success": "o pneu foi removido permanentemente com sucesso", "index": index});
-      //var historico = cdHistorico.cadastrar(id,"Removeu Permanentemente","Pneu"); 
-      var historico = true;
+      res.send({"success": "o pneu foi removido permanentemente com sucesso", "index": index});
+      var historico = cdHistorico.cadastrar(id,"Removeu Permanentemente","Pneu");
       if (historico) {res.send({"success": "o pneu foi removido com sucesso", "index": index})}
       else { res.status(404).send({"failure": "Remoção de pneu falhou"});}
   }else{
@@ -87,8 +84,7 @@ routes.post('/lixeirapneus', (req: Request, res: Response) => {
   var pneu : Pneu = <Pneu> req.body;
   var index = cdPneu.restaurarPneu(pneu);
   if(pneu != null) {
-      //var historico = cdHistorico.cadastrar(pneu.id,"Cadastrou","Pneu"); 
-      var historico = true;
+      var historico = cdHistorico.cadastrar(pneu.id,"Cadastrou","Pneu"); 
       if (historico) {res.send({"success": "Pneu cadastrado com sucesso", "index": index});}
       else { res.send({"failure": "Cadastro de pneu falhou"});}
   }

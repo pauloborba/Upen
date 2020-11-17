@@ -16,7 +16,7 @@ describe("O servidor", () => {
     return request.get(base_url + "pneus")
             .then(body => 
                expect(body).toBe("[]")
-             )
+            )
             .catch(e => 
                expect(e).toEqual(null)
             );
@@ -39,7 +39,7 @@ describe("O servidor", () => {
     var resposta2 = '{"id":"0002","marca":"Goodyear","data":"10/02/2019",eventos":[],"atribuicao":["","","",false],"aro":"18","largura":"27","capacidade":"220","custo":"0","kms":"0","treadwear":"140"}';
 
     return request.post(base_url + "pneu", pneu1)
-             .then(body => {
+            .then(body => {
                 expect(body).toEqual({success: "cadastro de pneu com sucesso"});
                 return request.post(base_url + "pneu", pneu2)
                         .then(body => {
@@ -123,13 +123,13 @@ describe("O servidor", () => {
                                       expect(body).not.toContain(resposta1);
                                       return request.get(base_url + "pneus").then( body =>{
                                          expect(body).toContain(resposta1);
-                                      })
-                                   })
+                                        })
+                                    })
                                 })
-                             })
-                          })
-                       })                            
-                 })
+                            })
+                        })
+                    })                            
+                })
            .catch(err => {
               expect(err).toEqual(null)
            });
