@@ -4,7 +4,7 @@ import { Request, Response } from "express";
 
 import { Pneu } from '../common/pneu';
 import { Veiculo } from '../common/veiculo';
-import { Historico } from '../common/historico'
+import { Historico } from '../common/historico';
 import { Funcionario } from '../common/funcionario';
 import { CadastroVeiculo } from './cadastroVeiculo';
 import { CadastroHistorico } from './cadastroHistorico'
@@ -73,6 +73,19 @@ routes.get('/pneu/cadastro', (req: Request, res: Response) => {
 routes.get('/veiculos', (req: Request, res: Response) => {
   res.send(JSON.stringify(cdVeiculo.listarVeiculos()));
 });
+
+routes.post('/veiculos', (req: Request, res: Response) => {
+  var vel: Veiculo = <Veiculo> req.body;
+  var veiculo = cdVeiculo.cadastrarVeiculo(vel);
+  if(veiculo) {
+      //var historico = cdHistorico.cadastrar(vel.placa,"Cadastrou","Veiculo"); 
+      var historico = true;
+      if (historico) {res.send(veiculo);}
+      else { res.status(404).send({"falha": "Cadastro de veiculo falhou"});}
+  }
+  else 
+      res.status(404).send({"falha": "Cadastro de veiculo falhou"});
+})
 
 routes.delete('/veiculos/:id', function (req: Request, res: Response) {
   var id = req.params.id;
