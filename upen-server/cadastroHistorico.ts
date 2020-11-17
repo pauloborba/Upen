@@ -73,7 +73,7 @@ export class CadastroHistorico {
     cadastrar(id: String, op: String, element: String): Historico{
         var hist = new Historico();
         var result = null;
-        if(this.checkIfOposite(id,op,element)){
+        if(id && op && element && this.checkIfOposite(id,op,element)){
             hist.copyFrom({
               "operacao": op,
               "qualElemento": element,

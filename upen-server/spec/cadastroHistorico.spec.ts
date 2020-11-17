@@ -75,4 +75,5 @@ describe("The 'CadastroHistorico'", () =>{
         cadastro.deleteHistorico(historic.id,historic.operacao,historic.qualElemento,historic.timeStamp)
         expectHistoric(0)
       })
+
 })

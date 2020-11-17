@@ -106,6 +106,33 @@ routes.get('/historicos', (req: Request, res: Response) => {
     res.send(JSON.stringify(cdHistorico.getHistoricos()));
 });
 
+routes.post('/historicos', (req: Request, res: Response) => { 
+  var historico: Historico = <Historico> req.body;
+    historico = cdHistorico.cadastrar(historico.id,historico.operacao,historico.qualElemento);
+    if (historico != null) {
+      res.send({"success": "o historico foi devidamente cadastrado."});
+    } else {
+        res.status(404).send({"failure": "o historico nao pode ser cadastrado"});
+    }
+});
+
+routes.delete('/historicos', (req: Request, res: Response) => {
+  var id = <String> req.query.id
+  var op = <String> req.query.op
+  var el = <String> req.query.el
+  var tS = <String> req.query.tS
+  var timeStamp : Number = +tS
+  var aux = cdHistorico.deleteHistorico(id,op,el,timeStamp);
+  if (aux) {
+    res.send({"success" : "o funcionario foi devidamente removido."})
+  } else{
+    res.status(404).send({"failure": "o funcionario nao pode ser cadastrado"});
+  }
+
+});
+
+
+
 // ROTAS FUNCIONARIO
 
 routes.get('/funcionarios', (req: Request, res: Response) => {
@@ -120,6 +147,16 @@ routes.post('/funcionarios', (req: Request, res: Response) => {
     } else {
         res.status(404).send({"failure": "o funcionario nao pode ser cadastrado"});
     }
+});
+
+routes.delete('/funcionarios/:id', (req: Request, res: Response) => {
+  var id = req.params.id;
+  var aux = cdFuncionario.deletarFuncionario(id);
+  if (aux) {
+    res.send({"success" : "o funcionario foi devidamente removido."})
+  } else{
+    res.status(404).send({"failure": "o funcionario nao pode ser cadastrado"});
+  }
 
 });
 
