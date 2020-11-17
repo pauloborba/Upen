@@ -1,1 +1,139 @@
-<p>lista-veiculo works!</p>
+<html >
+    <head>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    </head>
+    <body>
+        <div class="pageName">
+            <h1>Lista de Veículos</h1>
+        </div>
+
+
+        <div class="searchBarDiv form-inline d-flex md-form form-sm mt-0">
+            <i class="fas fa-search searchIcon" aria-hidden="true"></i>
+            <input class="form-control form-control-sm ml-3 w-50" type="text" [(ngModel)]="searchInput"  placeholder="Buscar Veículo" name="searchBar" > <!-- aria-label="Search"> -->
+        </div>
+
+
+        <div class="tabelaCampos">
+            <table>
+                <div class="campos" >
+                    <tr>
+                        <td class="elementoCampo">Placa</td>
+                        <td class="elementoCampo">Modelo</td>
+                        <td class="elementoCampo">Marca</td>
+                        <td class="elementoCampo">Ano</td>
+                        <td class="elementoCampo">Função</td>
+                    </tr>
+                </div>
+            </table>
+        </div>
+
+        <div class="global">
+            <div class="listaVeiculos">
+                <table *ngFor="let a of pickOne(), let i = index" >
+                        <div class="blocoPosition">
+                            <tr name="vehiclelist">
+                                <a routerLink="/veiculos/{{a.placa}}" routerLinkActive="active-button">
+                                    <div class="bloco">
+                                            <div class="divVeiculoInfo"><td class="veiculoInfo" name="placalist">{{displayData(a.placa)}}</td></div>
+                                            <div class="divVeiculoInfo"><td class="veiculoInfo" name="modelolist">{{displayData(a.modelo)}}</td></div>
+                                            <div class="divVeiculoInfo"><td class="veiculoInfo" name="marcalist">{{displayData(a.marca)}}</td></div>
+                                            <div class="divVeiculoInfo"><td class="veiculoInfo" name="anolist">{{a.ano}}</td></div>
+                                            <div class="divVeiculoInfo"><td class="veiculoInfo" name="funcaolist">{{displayData(a.funcao)}}</td></div>
+                                    </div> 
+                                </a>
+                                <td class="botaotd"><button class="btn" name="removerButton" (click)="removerVeiculo(a.placa)" >  <span class="fa fa-trash"></span></button></td>
+                                                                
+                                <td *ngIf = "checkFirst(i) || veiculos.length == 0"  class="botaoTdRefresh" (click)="refresh()"><button class="btn-refresh"><i class="fas fa-redo-alt"></i></button></td>
+                            </tr>
+                        </div>
+                </table>
+            </div>
+                <div class="divBotaoAcessarLixeira"><a routerLink="/lixeiraveiculos"  routerLinkActive="active-button">  <button name="LixeiraVeiculos" class="btnLixeira"><i class="fas fa-trash-alt"></i></button></a></div>
+                <div class="divBotaoInserir"><input type="button" value="+" name="botaoInserir" (click)="abrirPopup()" class="botaoInserirVeiculo"></div>
+
+        </div>
+
+
+        <!-- The Modal -->
+        <div class="modal" id="myModal" [ngClass]="{'show': popupCadastro}">
+            <div class="modal-dialog">
+                <div class="modal-content" (mouseover)="resetBotaoCadastrar()">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <div class="modal-title" ><h4 class="titlePopUp">Cadastre um Veículo</h4></div>
+                        <div class="closeDiv"><button type="button" name="botaoFecharPopUp" class="botaoClose" (click)="fecharPopup()" >x</button></div>
+                    </div>
+            
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <table>
+                            <div class="linhaCadastro">
+                                <tr>
+                                    <td>
+                                        <input class="inputTextCadastro" (ngModelChange)="resetPlacaDuplicada()" type="text" placeholder="Placa" name="placabox" [(ngModel)]="veiculo.placa" />
+                                    </td>
+                                    <td *ngIf = "checkNotFilled(veiculo.placa) && botaoCadastrarPressionado"  class="campoNaoPreenchido" >
+                                        Insira a placa
+                                    </td> 
+                                    <td *ngIf = "placaDuplicada"  class="campoNaoPreenchido" >
+                                        Placa já cadastrada
+                                    </td> 
+                                </tr>
+                            </div>
+                            <div class="linhaCadastro">
+                                <tr>
+                                    <td>
+                                        <input class="inputTextCadastro" type="text" placeholder="Modelo" name="modelobox"  [(ngModel)]="veiculo.modelo">
+                                    </td>
+                                    <td *ngIf = "checkNotFilled(veiculo.modelo) && botaoCadastrarPressionado"  class="campoNaoPreenchido" >
+                                        Insira o modelo
+                                    </td> 
+                                </tr>   
+                            </div>
+                            <div class="linhaCadastro">
+                                <tr>
+                                    <td>
+                                        <input class="inputTextCadastro" type="text" placeholder="Marca" name="marcabox"  [(ngModel)]="veiculo.marca">
+                                    </td>
+
+                                    <td *ngIf = "checkNotFilled(veiculo.marca) && botaoCadastrarPressionado"  class="campoNaoPreenchido" >
+                                        Insira a marca
+                                    </td> 
+
+                                </tr>
+                            </div>
+                            <div class="linhaCadastro">
+                                <tr>
+                                    <td>
+                                        <input class="inputTextCadastro" type="number" placeholder="Ano" name="anobox"  [(ngModel)]="anoAuxiliar" >
+                                    </td>
+                                    <td class="anoInvalido" *ngIf = "isAnoNotValid()">
+                                        Valor inválido
+                                    </td>
+                                    <td *ngIf = "checkNotFilledAno() && botaoCadastrarPressionado"  class="campoNaoPreenchido" >
+                                        Insira o ano
+                                    </td> 
+                                </tr>
+                            </div>
+                            <div class="linhaCadastro">
+                                <tr>
+                                    <td>
+                                        <input class="inputTextCadastro" type="text" placeholder="Função" name="funcaobox"  [(ngModel)]="veiculo.funcao">
+                                    </td>
+                                    <td *ngIf = "checkNotFilled(veiculo.funcao) && botaoCadastrarPressionado"  class="campoNaoPreenchido" >
+                                        Insira a função
+                                    </td> 
+                                </tr>
+                            </div>
+                        </table>
+                    </div>
+                    <button type="button" class="botaoCadastrar" (click)="criar()" name="botaoCadastrar" data-dismiss="modal">Cadastrar</button> 
+            
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

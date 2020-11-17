@@ -1,0 +1,62 @@
+<html >
+    <head>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+        <link rel="stylesheet" href="../lista-veiculo.component.css" >
+
+    </head>
+    <body>
+        <div class="pageName">
+            <h1>Lixeira de Veículos</h1>
+        </div>
+
+        <div class="searchBarDiv form-inline d-flex md-form form-sm mt-0">
+            <i class="fas fa-search searchIcon" aria-hidden="true"></i>
+            <input class="form-control form-control-sm ml-3 w-50" type="text" [(ngModel)]="searchInput"  placeholder="Buscar Veículo" name="searchBar" > <!-- aria-label="Search"> -->
+        </div>
+
+        <div class="tabelaCampos">
+            <table>
+                <div class="campos" >
+                    <tr>
+                        <td class="elementoCampo">Placa</td>
+                        <td class="elementoCampo">Modelo</td>
+                        <td class="elementoCampo">Marca</td>
+                        <td class="elementoCampo">Ano</td>
+                        <td class="elementoCampo">Função</td>
+                    </tr>
+                </div>
+            </table>
+        </div>     
+        <div class="global">
+            <div class="listaVeiculos">
+                <table *ngFor="let a of pickOne(), let i = index" >
+                        <div class="blocoPosition">
+                            <tr name="vehicleTrashList">
+                                <a routerLink="/veiculos/{{a.placa}}" routerLinkActive="active-button">
+                                    <div class="bloco">
+                                            <div class="divVeiculoInfo"><td class="veiculoInfo" name="placalist">{{displayData(a.placa)}}</td></div>
+                                            <div class="divVeiculoInfo"><td class="veiculoInfo" name="modelolist">{{displayData(a.modelo)}}</td></div>
+                                            <div class="divVeiculoInfo"><td class="veiculoInfo" name="marcalist">{{displayData(a.marca)}}</td></div>
+                                            <div class="divVeiculoInfo"><td class="veiculoInfo" name="anolist">{{a.ano}}</td></div>
+                                            <div class="divVeiculoInfo"><td class="veiculoInfo" name="funcaolist">{{displayData(a.funcao)}}</td></div> 
+                                    </div> 
+                                </a>
+
+                                <div class="divButtons">
+                                    <div class="dinvInsideDiv">
+                                        <td class="hvr-icon-down"><button class="btnremoval" name="removerPermanenteButton" (click)="openDialog(a)" >Excluir permanentemente <span class="fa fa-trash hvr-icon"></span></button></td>
+                                        <td class="hvr-icon-up"><button class="btnRestore" name="restoreButton" (click)="restaurarVeiculo(a)" >Restaurar Veículo <i class="fas fa-trash-restore hvr-icon"></i></button></td>
+                                    </div>
+                                </div>
+
+                            </tr> 
+                        </div>
+                </table>
+            </div>
+            <div class="divBotaoAcessarLixeira"><a routerLink="/veiculos" routerLinkActive="active-button">  <button class="btnLixeira"><i class="fas fa-arrow-left"></i></button></a></div>
+            
+        </div>
+        
+
+    </body>
+</html>

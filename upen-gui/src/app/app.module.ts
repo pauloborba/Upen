@@ -16,6 +16,7 @@ import { FuncionarioComponent } from './screens/funcionario/funcionario.componen
 import { ListaVeiculoComponent } from './screens/lista-veiculo/lista-veiculo.component';
 import { PneuElementoComponent } from './screens/pneu-elemento/pneu-elemento.component';
 import { VeiculoElementoComponent } from './screens/veiculo-elemento/veiculo-elemento.component';
+import { DialogPermanentRemoval } from "./screens/lista-veiculo/lixeira-veiculo/Dialog/DialogPermanentRemoval";
 
 // servicos
 import { HistoricoService } from './services/HistoricoService/historico.service';
@@ -23,7 +24,8 @@ import { FuncionarioService } from './services/FuncionarioService/funcionario.se
 import { ListaPneusService } from './services/ListaPneuService/lista-pneus.service';
 import { ListaVeiculoService } from './services/ListaVeiculoService/lista-veiculo.service';
 import { PneuElementoService  } from './services/PneuElementoService/pneu-elemento.service';
-import { VeiculoElementoService } from './services/VeiculoElementoService/veiculo-elemento.service'
+import { VeiculoElementoService } from './services/VeiculoElementoService/veiculo-elemento.service';
+import { LixeiraVeiculoComponent } from './screens/lista-veiculo/lixeira-veiculo/lixeira-veiculo.component'
 
 
 
@@ -39,6 +41,8 @@ import { VeiculoElementoService } from './services/VeiculoElementoService/veicul
     DashBoardComponent,
     DashBoardDetailComponent,
     ListaPneusComponent,
+    LixeiraVeiculoComponent,
+    DialogPermanentRemoval
   ],
   imports: [
     BrowserModule,
@@ -53,8 +57,10 @@ import { VeiculoElementoService } from './services/VeiculoElementoService/veicul
     { path: 'pneus', component: ListaPneusComponent },
     { path: 'pneus/:id', component:PneuElementoComponent},
     { path: 'veiculos', component: ListaVeiculoComponent },
-    { path: 'veiculos/:placa', component: VeiculoElementoComponent },])
+    { path: 'veiculos/:placa', component: VeiculoElementoComponent },
+    {path: 'lixeiraveiculos', component: LixeiraVeiculoComponent }]),
   ],
+
   providers: [
     HistoricoService, FuncionarioService,
     ListaPneusService, ListaVeiculoService,
