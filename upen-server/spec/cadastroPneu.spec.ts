@@ -65,11 +65,6 @@ describe("O cadastro de pneus", () => {
     expect(cadastro.getPneus().length).toBe(1);
   })
 
-  it("deleta um pneu colocado no teste anterior", () => {
-    cadastro.remover("0001");
-    expect(cadastro.getPneus().length).toBe(0);
-  })
-
   it("deleta um novo pneu", () => {
     let pneuA : Pneu = new Pneu();
     pneuA.id = "666"

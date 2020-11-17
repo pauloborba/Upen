@@ -30,7 +30,7 @@ routes.post('/pneu', function (req: Request, res: Response) {
   var confirmar: Pneu = <Pneu> req.body;
   var pneu = cdPneu.cadastrar(confirmar);
   if(pneu == "success"){
-    var historico = cdHistorico.cadastrar(confirmar.id,"Cadastrou","Pneu");  
+    var historico = cdHistorico.cadastrar(confirmar.id,"Cadastrou","Pneu");
     if (historico) {res.send({"success": "cadastro de pneu com sucesso"});}
   } else {
     res.send({"failed": "cadastro de pneu falhou"});
