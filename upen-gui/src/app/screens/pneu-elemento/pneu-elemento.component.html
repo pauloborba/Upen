@@ -1,1 +1,196 @@
-<p>pneu-elemento works!</p>
+<body>
+    <div class="pneu-id">
+        <div class="pneu-id-texto">
+            <h3> ID# {{pneu.id}} </h3>
+        </div>
+        <div class="pneu-id-barra"></div>
+    </div>
+    <img src="https://i.imgur.com/4ze3T4y.png" height="286" width="282" id="imgPneu" title="Pneu.png" alt="Pneu.png">
+    <div class="veiculo">
+        <div class="veiculo-title"><h3>Veiculo</h3></div>
+        <div class="veiculo-infos">
+            <div class="veiculo-info">
+                <div class="veiculo-placa">Placa:</div>
+                <input [(ngModel)]="atribuicao[0]" type="veiculo-input" id="veiculo-placa" placeholder="{{pneu.atribuicao[0]}}">
+            </div>
+            <div class="veiculo-info">
+                <div class="veiculo-posicao">Pos:</div>
+                <input [(ngModel)]="atribuicao[1]" type="veiculo-input" id="veiculo-posicao" placeholder="{{pneu.atribuicao[1]}}">
+            </div>
+            <div class="veiculo-info">
+                <div class="veiculo-lado">Lado:</div>
+                <input [(ngModel)]="atribuicao[2]" type="veiculo-input" id="veiculo-lado" placeholder="{{pneu.atribuicao[2]}}">
+            </div>
+        </div>
+        <div class="veiculo-atribuicao">
+            <td *ngIf="pneu.atribuicao[3];else elseBlock" id="veiculo-atribuicao-valor" class="veiculo-atribuicao-true">V</td>
+            <ng-template #elseBlock><td id="veiculo-atribuicao-valor" class="veiculo-atribuicao-false">X</td></ng-template>
+        </div>
+        <div class="botoes">
+            <td class="botao-atribuir"><button class="atribuir" name="atribucao-botao"(click)="atribuirVeiculo(atribuicao)">Atribuir</button></td>
+            <td class="botao-desatribuir"><button class="desatribuir" name="desatribuicao-botao"(click)="desatribuirVeiculo(pneu)">Desatribuir</button></td>
+        </div>
+    </div>
+    <div class="pneu-infos">
+        <div class="pneu-infos-tabela">
+            <div class="pneu-infos-campo" id="camposEsq">
+                <div class="pneu-infos-campo-div">
+                    <div class="pneu-campo">Marca:</div>
+                    <input [(ngModel)]="pneu.marca" class="pneu-input" type="text" id="pneu-marca" placeholder="{{pneu.marca}}">
+                </div>
+            </div>
+            <div class="pneu-infos-campo" id="camposDir">
+                <div class="pneu-infos-campo-div">
+                    <div class="pneu-campo">Aro:</div>
+                    <input [(ngModel)]="pneu.aro" class="pneu-input" type="number" onKeyPress="if(this.value.length > 1) return false;" min="0" max="99" id="pneu-aro" placeholder="{{pneu.aro}}">
+                </div>
+            </div>
+            <div class="pneu-infos-campo" id="camposEsq">
+                <div class="pneu-infos-campo-div">
+                    <div class="pneu-campo">Data:</div>
+                    <input [(ngModel)]="pneu.data" class="pneu-input" type="date" min="1901-01-01" max="2020-11-17" id="pneu-data" placeholder="{{pneu.data}}">
+                </div>
+            </div>
+            <div class="pneu-infos-campo" id="camposDir">
+                <div class="pneu-infos-campo-div">
+                    <div class="pneu-campo">Larg:</div>
+                    <input [(ngModel)]="pneu.largura" class="pneu-input" type="number" onKeyPress="if(this.value.length > 1) return false;" id="pneu-largura" placeholder="{{pneu.largura}}">
+                </div>
+            </div>
+            <div class="pneu-infos-campo" id="camposEsq">
+                <div class="pneu-infos-campo-div">
+                    <div class="pneu-campo">Cap:</div>
+                    <input [(ngModel)]="pneu.capacidade" class="pneu-input" type="number" max="199" min="20" id="pneu-capacidade" placeholder="{{pneu.capacidade}}">
+                </div>
+            </div>
+            <div class="pneu-infos-campo" id="camposDir">
+                <div class="pneu-infos-campo-div">
+                    <div class="pneu-campo">Custo:</div>
+                    <input [(ngModel)]="pneu.custo" class="pneu-input" type="number" step="0.1" id="pneu-custo" placeholder="{{pneu.custo}}">
+                </div>
+            </div>
+            <div class="pneu-infos-campo" id="camposEsq">
+                <div class="pneu-infos-campo-div">
+                    <div class="pneu-campo">Kms:</div>
+                    <input [(ngModel)]="pneu.kms"class="pneu-input" type="number" id="pneu-kms" placeholder="{{pneu.kms}}">
+                </div>
+            </div>
+            <div class="pneu-infos-campo" id="camposDir">
+                <div class="pneu-infos-campo-div">
+                    <div class="pneu-campo">Tread:</div>
+                    <input [(ngModel)]="pneu.treadwear"class="pneu-input" type="number" max="620" min="60" onKeyPress="if(this.value.length > 2) return false;" id="pneu-treadwear" placeholder="{{pneu.treadwear}}">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="botoes-laterais">
+        <div class="botao-lateral-cb">
+            <td><div class="botao-evento"><input type="button" value="C/B" class="botao-lateral-custo-beneficio" (click)="toggleField(1)"></div></td>
+        </div>
+        <div class="botao-lateral-exclua">
+            <td><div class="botao-evento"><input type="button" value="Excluir" class="botao-lateral-excluir" (click)="deletarPneu(pneu.id)" ></div></td>
+        </div>
+        <div class="botao-lateral-atualize">
+            <td><div class="botao-evento"><input type="button" value="Atualizar Dados" class="botao-lateral-atualizar"(click)="atualizarPneu(pneu)"></div></td>
+        </div>
+        <div class="botao-lateral-adicione">
+            <td><div class="botao-evento"><input type="button" value="+" class="botao-lateral-adicionar"(click)="toggleField(0)"></div></td>
+        </div>
+    </div>
+    <div class="eventos">
+        <table>
+            <div class="eventos-elementos">
+                <tr>
+                    <td class="elementos">Serviço</td>
+                    <td class="elementos">|</td>
+                    <td class="elementos">Data</td>
+                    <td class="elementos">|</td>
+                    <td class="elementos">Custo</td>
+                </tr>
+            </div>
+        </table>
+        <div class="lista-eventos">
+            <table *ngFor="let a of pneu.eventos" > 
+                <div class="evento-bolinha"></div>
+                <div class="bloco">
+                        <div class="divEvento-info"><td class="evento-info">{{a[0]}}</td></div>
+                        <div class="divEvento-info"><td class="evento-info">|</td></div>
+                        <div class="divEvento-info"><td class="evento-info">{{a[1]}}</td></div>
+                        <div class="divEvento-info"><td class="evento-info">|</td></div>
+                        <div class="divEvento-info"><td class="evento-info">R${{a[2]}}</td></div>
+                    </div>
+                <td><div class="botao-evento"><input type="button" value="X" class="botao-evento-remover" (click)="deletarEvento(a)" ></div></td>
+            </table>
+        </div>
+    </div>
+
+
+    <!--<button  id="myBtn" (click)="toggleField()" >{{clickModal}}</button>-->
+
+    <div id="myModal" class="modal" [class.modal1]="clickModal==1">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" (click)="toggleField(0)">&times;</span>
+                <h2>Cadastrar evento</h2>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body-entradas">
+                    <div class="modal-serviço">Serviço :</div>
+                    <input [(ngModel)]="evento[0]" class="modal-serviço-input" type="text" placeholder="Serviço">
+                    <div class="modal-data">Data :</div>
+                    <input [(ngModel)]="evento[1]" class="modal-data-input" type="date" placeholder="Data">
+                    <div class="modal-custo">Custo :</div>
+                    <input [(ngModel)]="evento[2]" class="mudal-custo-input" type="number" placeholder="Custo">
+                </div>
+                <button  id="addEv" (click)="toggleField(0); adicionarEvento(evento)">Adicionar</button>
+            </div>
+            <div class="modal-footer">
+                
+            </div>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal" [class.modal1]="clickModal2==1">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" (click)="toggleField(1)">&times;</span>
+                <h2>Custo / Benefício</h2>
+            </div>
+            <div class="modal-body-cb">
+                <div class="modal-body-dados">
+                    <div class="modal-body-dados-kms">
+                        Kms(mil): {{pneu.kms}}
+                    </div>
+                    <div class="modal-body-dados-custo">
+                        Custo: R$ {{getCost()}}
+                    </div>
+                </div>
+                <div class="modal-body-avaliacao">
+                    <div id="cbResultValue">
+                        <ng-container *ngIf="getCBC()>=0.88; then first; else second" ></ng-container>
+                        <ng-template #first><td id="cbResultValueLetter">A</td></ng-template>
+                        <ng-template #second>
+                            <ng-container *ngIf="getCBC()>=0.76; then third; else fourth"></ng-container>
+                        </ng-template>
+                        <ng-template #third><td id="cbResultValueLetter">B</td></ng-template>
+                        <ng-template #fourth>
+                            <ng-container *ngIf="getCBC()>=0.6; then fifth; else sixth"></ng-container>
+                        </ng-template>
+                        <ng-template #fifth><td id="cbResultValueLetter">C</td></ng-template>
+                        <ng-template #sixth><td id="cbResultValueLetter">D</td></ng-template>
+                    </div>
+                    <div id="cbResult">
+                        <div id="cbResult1">Km/C: {{((pneu.kms/getCost())*1000).toFixed(2)}} </div>
+                        <div id="cbResult2">Coef: {{(getCBC()).toFixed(2)}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                
+            </div>
+        </div>
+    </div>
+
+</body>
