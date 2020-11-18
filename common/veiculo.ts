@@ -7,7 +7,7 @@ export class Veiculo {
     modelo: string;
     funcao: string;
     pneus: Pneu[];
-    eventos: [string, string, number][];
+    eventos: [string, string, number][]; //[data, mensagem, preço]
 
     constructor(){
         this.clean();

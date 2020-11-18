@@ -1,4 +1,6 @@
 compiledCode/
 
+node_modules/
+
 *.js
 *.js.map

@@ -1,1 +1,29 @@
-<p>veiculo-elemento works!</p>
+<div id="page-veiculo">
+  <div class="content-wrapper">
+    <div class="info">
+      <h1>Veiculo de placa {{veiculo.placa}}</h1>
+      <div class="itens-veiculo">
+        <p>{{veiculo.marca}}</p>
+        <p>{{veiculo.modelo}}</p>
+        <p>{{veiculo.ano}}</p>
+        <p>{{veiculo.funcao}}</p>
+        <p *ngFor="let pneu of veiculo.pneus">ID do pneu: {{pneu.id}}</p>
+      </div>
+      <div class="buttons"> 
+        <button id="atribuir-dialog-btn" class="cad" mat-mini-fab color="black" (click)="openAttDialog()">+</button>
+      </div>
+      <div class="buttons">
+      <button id="desatribuir-dialog-btn" class="cad" mat-mini-fab color="black" (click)="openDstDialog()">-</button>
+      </div>
+      <div class="buttons">
+        <button name="deletar-btn" class="cad" mat-mini-fab color="black" (click)="deletarVeiculo()">Deletar</button>
+      </div>
+      <div class="buttons">
+        <button name="log-btn" class="cad" mat-mini-fab color="black" (click)="setLogTrue()">Log</button>
+      </div>
+      <div class="log" *ngIf="showLog">
+        <div *ngFor="let evento of eventos">{{evento}}</div>
+      </div>
+    </div>
+  </div>
+</div>

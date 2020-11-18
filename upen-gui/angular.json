@@ -123,5 +123,8 @@
       }
     }
   },
-  "defaultProject": "upen-gui"
+  "defaultProject": "upen-gui",
+  "cli": {
+    "analytics": "6ea7b024-f8c6-48c8-b135-cac96aad74b5"
+  }
 }
