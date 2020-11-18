@@ -17,15 +17,9 @@ export class Veiculo {
         this.marca = "";
         this.ano = 0;
         this.placa = "";
-        this.modelo = "Gol";
-        this.funcao = "Revisao";
-        this.eventos = [
-            [
-                "15/11/2020",
-                "Veiculo entrando para revisao",
-                100
-            ]
-        ]
+        this.modelo = "";
+        this.funcao = "";
+        this.eventos = [];
         this.pneus = [];
     }
 
