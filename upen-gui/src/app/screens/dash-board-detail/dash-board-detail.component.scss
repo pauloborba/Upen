@@ -1,0 +1,85 @@
+#chart {
+  width: 38%;
+}
+
+.dashboard-detail-container {
+
+  .detail-title {
+    margin-top: 10px;
+
+      h3 {
+        color: #e0c2f5;
+        text-align: center;
+
+     }
+  }
+
+  .detail-divide-container {
+    display: flex;
+    justify-content: center;
+
+    .detail-divide {
+      width: 55%;
+      border: 1px solid white;
+      margin-top: 10px;
+    }
+  }
+
+  .detail-status {
+    width: 50%;
+    margin: 0 auto;
+    padding-top: 10px;
+
+    table {
+      margin: 0 auto;
+      border-collapse: collapse;
+      width: 100%;
+      td, th {
+        border: 1px solid #dddddd;
+        color: rgb(238, 208, 255);
+        text-align: left;
+        padding: 5px;
+      }
+
+      tr:nth-child(odd) {
+        background-color: #081414;
+      }
+    }
+  }
+
+  .detail-historico {
+    margin-top: 30px;
+
+    h2 {
+      margin-left: 50px;
+      color: #e0c2f5;
+    }
+
+    .detail-divide-container {
+      display: flex;
+      justify-content: center;
+
+      .detail-divide {
+        width: 100%;
+        border: 1px solid #e0c2f5;
+        margin-top: 10px;
+      }
+    }
+
+    .detail-historico-entries {
+      width: 50%;
+      margin: 0 auto;
+
+      .historico {
+        margin: 10px;
+        padding: 8px;
+        text-align: center;
+        border: 3px solid #081414;
+        color: white;
+      }
+    }
+  }
+
+}
+
+

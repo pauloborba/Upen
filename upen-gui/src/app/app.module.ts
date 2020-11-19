@@ -47,7 +47,9 @@ import { VeiculoElementoService } from './services/VeiculoElementoService/veicul
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    RouterModule.forRoot([{path: 'dashboard', component: DashBoardComponent},
+    RouterModule.forRoot([
+    { path: '',   redirectTo: '/dashboard', pathMatch: 'full' },
+    {path: 'dashboard', component: DashBoardComponent},
     {path: 'dashboard/:tipo', component: DashBoardDetailComponent},
     {path: 'funcionarios', component: FuncionarioComponent},
     { path: 'pneus', component: ListaPneusComponent },

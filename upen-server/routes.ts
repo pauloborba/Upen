@@ -10,11 +10,15 @@ import { CadastroVeiculo } from './cadastroVeiculo';
 import { CadastroHistorico} from './cadastroHistorico'
 import { CadastroDePneu } from './cadastroPneu';
 import { CadastroFuncionario } from './cadastroFuncionario';
+import { CadastroDePneuMock } from "./spec/mocks/cadastroPneuMock";
+import { CadastroVeiculoMock } from "./spec/mocks/cadastroVeiculoMock";
 
 const cdHistorico: CadastroHistorico = new CadastroHistorico()
 const cdFuncionario: CadastroFuncionario = new CadastroFuncionario();
 const cdPneu: CadastroDePneu = new CadastroDePneu();
 const cdVeiculo: CadastroVeiculo = new CadastroVeiculo(); 
+const cdPneuMock: CadastroDePneuMock = new CadastroDePneuMock();
+const cdVeiculoMock: CadastroVeiculoMock = new CadastroVeiculoMock();
 
 // ROTAS DE LISTA PNEU / PNEU ELEMENTO
 
@@ -102,6 +106,33 @@ routes.get('/historicos', (req: Request, res: Response) => {
     res.send(JSON.stringify(cdHistorico.getHistoricos()));
 });
 
+routes.post('/historicos', (req: Request, res: Response) => { 
+  var historico: Historico = <Historico> req.body;
+    historico = cdHistorico.cadastrar(historico.id,historico.operacao,historico.qualElemento);
+    if (historico != null) {
+      res.send({"success": "o historico foi devidamente cadastrado."});
+    } else {
+        res.status(404).send({"failure": "o historico nao pode ser cadastrado"});
+    }
+});
+
+routes.delete('/historicos', (req: Request, res: Response) => {
+  var id = <String> req.query.id
+  var op = <String> req.query.op
+  var el = <String> req.query.el
+  var tS = <String> req.query.tS
+  var timeStamp : Number = +tS
+  var aux = cdHistorico.deleteHistorico(id,op,el,timeStamp);
+  if (aux) {
+    res.send({"success" : "o funcionario foi devidamente removido."})
+  } else{
+    res.status(404).send({"failure": "o funcionario nao pode ser cadastrado"});
+  }
+
+});
+
+
+
 // ROTAS FUNCIONARIO
 
 routes.get('/funcionarios', (req: Request, res: Response) => {
@@ -116,6 +147,16 @@ routes.post('/funcionarios', (req: Request, res: Response) => {
     } else {
         res.status(404).send({"failure": "o funcionario nao pode ser cadastrado"});
     }
+});
+
+routes.delete('/funcionarios/:id', (req: Request, res: Response) => {
+  var id = req.params.id;
+  var aux = cdFuncionario.deletarFuncionario(id);
+  if (aux) {
+    res.send({"success" : "o funcionario foi devidamente removido."})
+  } else{
+    res.status(404).send({"failure": "o funcionario nao pode ser cadastrado"});
+  }
 
 });
 
@@ -149,5 +190,14 @@ routes.get('/veiculo', (req: Request, res: Response) => {
 
     res.send({ veiculo });
 });
+
+  // rotas mock
+  routes.get('/pneusMock', (req: Request, res: Response) => {
+    res.send(JSON.stringify(cdPneuMock.getPneus()))
+  })
+
+  routes.get('/veiculosMock', (req: Request, res: Response) => {
+    res.send(JSON.stringify(cdVeiculoMock.listarVeiculos()))
+  })
 
 export { routes };
